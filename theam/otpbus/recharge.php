@@ -6,7 +6,11 @@ if (isset($conn)) {
     $gwq = $conn->query("SELECT name FROM payment_gateways WHERE status = 1");
     if ($gwq) {
         while ($r = $gwq->fetch_assoc()) {
-            $enabled_gateway_names[] = strtolower(trim((string)($r['name'] ?? '')));
+            $raw = strtolower(trim((string)($r['name'] ?? '')));
+            if ($raw !== '') {
+                $enabled_gateway_names[] = $raw;
+                $enabled_gateway_names[] = preg_replace('/[^a-z0-9]+/', '', $raw);
+            }
         }
     }
 }

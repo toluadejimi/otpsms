@@ -8,7 +8,12 @@ if (isset($conn)) {
     $gwq = $conn->query("SELECT name FROM payment_gateways WHERE status = 1");
     if ($gwq) {
         while ($r = $gwq->fetch_assoc()) {
-            $enabled_gateway_names[] = strtolower(trim((string)($r['name'] ?? '')));
+            $raw = strtolower(trim((string)($r['name'] ?? '')));
+            if ($raw !== '') {
+                $enabled_gateway_names[] = $raw;
+                // normalized variant (remove spaces/symbols) to match names like "Payment Point"
+                $enabled_gateway_names[] = preg_replace('/[^a-z0-9]+/', '', $raw);
+            }
         }
     }
 }
@@ -73,7 +78,7 @@ $paymentpoint_enabled = in_array('paymentpoint', $enabled_gateway_names, true) |
             </li>
             <?php } ?>
 
-            <?php if (!$sprintpay_enabled) { ?>
+            <?php if (!$sprintpay_enabled && !$paymentpoint_enabled) { ?>
             <li>
                 <div class="item">
                     <div class="in">
