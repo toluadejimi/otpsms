@@ -1,0 +1,72 @@
+[04-Feb-2026 20:44:41 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php:25
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php(25): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 25
+[04-Feb-2026 20:47:21 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php:25
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php(25): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 25
+[04-Feb-2026 20:54:30 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php:25
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php(25): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 25
+[04-Feb-2026 21:02:21 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php:25
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php(25): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 25
+[09-Feb-2026 08:10:11 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[09-Feb-2026 08:10:11 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:16:28 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:16:28 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:20:45 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:20:45 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:23:31 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:23:31 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:29:49 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:29:49 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:30:54 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:30:54 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:33:26 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:33:26 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:34:48 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:34:48 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:35:41 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:35:41 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:38:55 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:38:55 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:46:04 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:46:04 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[22-Feb-2026 20:50:45 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[22-Feb-2026 20:50:45 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[24-Feb-2026 07:38:51 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[24-Feb-2026 07:38:51 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[01-Mar-2026 14:34:05 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[01-Mar-2026 14:34:05 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[01-Mar-2026 14:34:49 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[01-Mar-2026 14:34:49 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[01-Mar-2026 14:39:37 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[01-Mar-2026 14:39:37 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[01-Mar-2026 14:40:30 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[01-Mar-2026 14:40:30 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[01-Mar-2026 15:00:49 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[01-Mar-2026 15:00:49 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[01-Mar-2026 15:20:33 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 77
+[01-Mar-2026 15:20:33 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php on line 80
+[01-Mar-2026 15:23:39 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:50:22 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/airtime/placeAirtimeOrder.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2

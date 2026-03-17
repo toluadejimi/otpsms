@@ -1,0 +1,223 @@
+[05-Jan-2026 14:49:55 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 51
+[05-Jan-2026 14:49:55 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 63
+[05-Jan-2026 14:49:55 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 64
+[05-Jan-2026 14:49:55 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 72
+[05-Jan-2026 14:49:58 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 51
+[05-Jan-2026 14:49:58 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 63
+[05-Jan-2026 14:49:58 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 64
+[05-Jan-2026 14:49:58 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 72
+[05-Jan-2026 14:49:59 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 51
+[05-Jan-2026 14:50:00 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 63
+[05-Jan-2026 14:50:00 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 64
+[05-Jan-2026 14:50:00 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 72
+[05-Jan-2026 14:50:01 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 51
+[05-Jan-2026 14:50:01 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 63
+[05-Jan-2026 14:50:01 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 64
+[05-Jan-2026 14:50:02 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 72
+[05-Jan-2026 14:50:04 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 51
+[05-Jan-2026 14:50:04 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 63
+[05-Jan-2026 14:50:04 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 64
+[05-Jan-2026 14:50:04 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 72
+[06-Jan-2026 05:38:06 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 51
+[06-Jan-2026 05:38:06 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 63
+[06-Jan-2026 05:38:06 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 64
+[06-Jan-2026 05:38:06 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 72
+[08-Jan-2026 07:47:29 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 51
+[08-Jan-2026 07:47:29 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 63
+[08-Jan-2026 07:47:29 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 64
+[08-Jan-2026 07:47:29 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 72
+[13-Jan-2026 00:00:04 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 51
+[13-Jan-2026 00:00:04 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 63
+[13-Jan-2026 00:00:04 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 64
+[13-Jan-2026 00:00:05 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/paymentpoint/webhook.php on line 72
+[04-Feb-2026 20:18:44 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Feb-2026 00:12:44 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Feb-2026 18:57:18 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Too many connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Feb-2026 20:05:09 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Feb-2026 22:18:33 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Feb-2026 22:19:11 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Feb-2026 22:19:27 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Feb-2026 22:54:29 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[09-Feb-2026 19:34:21 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:23:26 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/generate_bank_account.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:31:37 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/class/class.control.php:6
+Stack trace:
+#0 /home/otpsxxdu/public_html/class/class.control.php(6): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/api/paymentpoint/get_bank_account.php(9): radiumsahil->__construct()
+#2 {main}
+  thrown in /home/otpsxxdu/public_html/class/class.control.php on line 6
+[01-Mar-2026 15:46:09 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/get_bank_account.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:46:09 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/generate_bank_account.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:49:32 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/get_bank_account.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:52:23 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:33:25 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:38:24 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/get_bank_account.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:45:13 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:46:07 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/get_bank_account.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:49:56 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/class/class.control.php:6
+Stack trace:
+#0 /home/otpsxxdu/public_html/class/class.control.php(6): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/api/paymentpoint/get_bank_account.php(9): radiumsahil->__construct()
+#2 {main}
+  thrown in /home/otpsxxdu/public_html/class/class.control.php on line 6
+[01-Mar-2026 16:50:07 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/class/class.control.php:6
+Stack trace:
+#0 /home/otpsxxdu/public_html/class/class.control.php(6): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/api/paymentpoint/get_bank_account.php(9): radiumsahil->__construct()
+#2 {main}
+  thrown in /home/otpsxxdu/public_html/class/class.control.php on line 6
+[01-Mar-2026 16:52:30 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/class/class.control.php:6
+Stack trace:
+#0 /home/otpsxxdu/public_html/class/class.control.php(6): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/api/paymentpoint/generate_bank_account.php(14): radiumsahil->__construct()
+#2 {main}
+  thrown in /home/otpsxxdu/public_html/class/class.control.php on line 6
+[01-Mar-2026 16:57:47 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/class/class.control.php:6
+Stack trace:
+#0 /home/otpsxxdu/public_html/class/class.control.php(6): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/api/paymentpoint/get_bank_account.php(9): radiumsahil->__construct()
+#2 {main}
+  thrown in /home/otpsxxdu/public_html/class/class.control.php on line 6
+[01-Mar-2026 17:03:05 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 17:08:23 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/get_bank_account.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[10-Mar-2026 14:16:48 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[10-Mar-2026 14:16:48 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[10-Mar-2026 14:16:50 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/paymentpoint/webhook.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2

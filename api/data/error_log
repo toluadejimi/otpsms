@@ -1,0 +1,348 @@
+[04-Feb-2026 20:31:02 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:35:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:35:21 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:35:31 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:35:33 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:37:30 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:37:43 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:37:44 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:38:42 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:38:42 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:38:44 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:38:48 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:38:48 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:42:07 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:42:15 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:42:26 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:43:20 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:44:12 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:44:22 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:44:57 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:45:18 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:45:29 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:46:03 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:46:03 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:46:03 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:46:39 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:48:31 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:48:32 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:54:44 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:54:47 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:54:52 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:00 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:00 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:06 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:07 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:22 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:27 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:29 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:32 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:47 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:55:49 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:56:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:56:48 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:14 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:20 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:22 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:23 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:29 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:29 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:57:47 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:58:25 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:58:25 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:58:50 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:58:50 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:59:43 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 20:59:44 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 21:00:36 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 21:01:02 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 21:01:02 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 21:01:14 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 21:01:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 21:01:44 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 21:01:47 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[04-Feb-2026 21:02:01 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.networks' doesn't exist in /home/otpsxxdu/public_html/api/data/getDataPlans.php:7
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/data/getDataPlans.php(7): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/data/getDataPlans.php on line 7
+[01-Mar-2026 14:35:44 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/data/placeDataOrder.php on line 80
+[01-Mar-2026 14:40:07 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/data/placeDataOrder.php on line 80
+[01-Mar-2026 16:15:55 Africa/Lagos] PHP Warning:  Trying to access array offset on value of type null in /home/otpsxxdu/public_html/api/data/placeDataOrder.php on line 80

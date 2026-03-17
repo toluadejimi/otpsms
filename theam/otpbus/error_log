@@ -1,0 +1,30 @@
+[08-Jan-2026 22:25:54 UTC] PHP Warning:  Undefined variable $web_name in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 7
+[08-Jan-2026 22:25:54 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WEBSITE_URL" in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php:13
+Stack trace:
+#0 /home/otpsxxdu/public_html/theam/otpbus/index.php(3): include()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 13
+[08-Jan-2026 22:25:56 UTC] PHP Warning:  Undefined variable $web_name in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 7
+[08-Jan-2026 22:25:56 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WEBSITE_URL" in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php:13
+Stack trace:
+#0 /home/otpsxxdu/public_html/theam/otpbus/index.php(3): include()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 13
+[08-Jan-2026 22:26:02 UTC] PHP Warning:  Undefined variable $web_name in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 7
+[08-Jan-2026 22:26:02 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WEBSITE_URL" in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php:13
+Stack trace:
+#0 /home/otpsxxdu/public_html/theam/otpbus/index.php(3): include()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 13
+[08-Jan-2026 22:26:04 UTC] PHP Warning:  Undefined variable $web_name in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 7
+[08-Jan-2026 22:26:04 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WEBSITE_URL" in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php:13
+Stack trace:
+#0 /home/otpsxxdu/public_html/theam/otpbus/index.php(3): include()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 13
+[08-Jan-2026 22:26:30 UTC] PHP Warning:  Undefined variable $web_name in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 7
+[08-Jan-2026 22:26:30 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "WEBSITE_URL" in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php:13
+Stack trace:
+#0 /home/otpsxxdu/public_html/theam/otpbus/index.php(3): include()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/theam/otpbus/include/header-main-auth.php on line 13

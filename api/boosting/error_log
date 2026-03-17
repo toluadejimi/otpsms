@@ -1,0 +1,550 @@
+[04-Feb-2026 21:24:54 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 21:30:42 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 21:44:06 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 21:45:21 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 21:46:28 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:02:00 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:11:15 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:11:28 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:14:00 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:15:47 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:24:33 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:25:47 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:27:59 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:30:37 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:31:24 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:31:48 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:33:05 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:33:44 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[04-Feb-2026 22:34:07 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''api_provider_id', category_name, service_name, api_order_id, link, quantity,...' at line 2 in /home/otpsxxdu/public_html/api/boosting/placeOrder.php:114
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(114): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/placeOrder.php on line 114
+[05-Feb-2026 00:01:41 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/class/class.control.php:6
+Stack trace:
+#0 /home/otpsxxdu/public_html/class/class.control.php(6): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(15): radiumsahil->__construct()
+#2 {main}
+  thrown in /home/otpsxxdu/public_html/class/class.control.php on line 6
+[05-Feb-2026 00:01:45 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Feb-2026 00:12:02 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Feb-2026 12:39:50 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: No such file or directory in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Feb-2026 18:57:11 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Too many connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Feb-2026 20:44:27 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Feb-2026 21:55:12 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Feb-2026 23:38:29 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getProviders.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Feb-2026 22:30:07 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Feb-2026 22:30:07 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Feb-2026 22:30:09 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getSocialMedia.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Feb-2026 22:35:08 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Feb-2026 23:03:40 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[07-Feb-2026 00:06:36 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getSocialMedia.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[07-Feb-2026 16:21:25 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[08-Feb-2026 22:25:58 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getSocialMedia.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[09-Feb-2026 21:15:06 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[09-Feb-2026 21:15:37 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[12-Feb-2026 09:05:29 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: MySQL server has gone away in /home/otpsxxdu/public_html/api/boosting/update-order-status.php:100
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(100): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/update-order-status.php on line 100
+[17-Feb-2026 07:05:08 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php:95
+Stack trace:
+#0 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php on line 95
+[17-Feb-2026 07:10:05 Africa/Lagos] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php:95
+Stack trace:
+#0 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php on line 95
+[20-Feb-2026 16:12:07 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[20-Feb-2026 16:12:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[20-Feb-2026 16:12:18 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[20-Feb-2026 16:12:20 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getSocialMedia.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[20-Feb-2026 16:12:29 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[20-Feb-2026 16:12:33 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getSocialMedia.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[20-Feb-2026 16:12:36 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(12): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[24-Feb-2026 09:03:15 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: MySQL server has gone away in /home/otpsxxdu/public_html/api/boosting/update-order-status.php:101
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(101): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/update-order-status.php on line 101
+[01-Mar-2026 15:19:57 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:20:03 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:20:03 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:25:03 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:30:04 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:31:13 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getProviders.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:35:03 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:39:32 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:39:36 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:39:40 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:39:47 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:39:47 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:39:53 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:40:00 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:40:02 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:40:02 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:40:03 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:40:29 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:40:33 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getSocialMedia.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:40:38 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:40:46 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:40:50 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 15:46:15 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getServices.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:37:27 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:41:14 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getProviders.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:42:32 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 16:50:26 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getCategories.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 17:00:11 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getProviders.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 17:00:15 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[01-Mar-2026 17:10:21 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/getProviders.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[02-Mar-2026 01:20:03 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[02-Mar-2026 01:20:04 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[05-Mar-2026 10:37:04 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Mar-2026 09:03:13 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: MySQL server has gone away in /home/otpsxxdu/public_html/api/boosting/update-order-status.php:101
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/boosting/update-order-status.php(101): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/boosting/update-order-status.php on line 101
+[06-Mar-2026 23:15:13 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[06-Mar-2026 23:50:16 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/class/class.control.php:6
+Stack trace:
+#0 /home/otpsxxdu/public_html/class/class.control.php(6): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/api/boosting/placeOrder.php(15): radiumsahil->__construct()
+#2 {main}
+  thrown in /home/otpsxxdu/public_html/class/class.control.php on line 6
+[10-Mar-2026 14:16:50 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2
+[10-Mar-2026 14:28:31 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: User otpsxxdu_otpsuite already has more than 'max_user_connections' active connections in /home/otpsxxdu/public_html/include/connect.php:2
+Stack trace:
+#0 /home/otpsxxdu/public_html/include/connect.php(2): mysqli->__construct()
+#1 /home/otpsxxdu/public_html/include/config.php(15): require_once('/home/otpsxxdu/...')
+#2 /home/otpsxxdu/public_html/api/boosting/cron_update_boosting_services.php(2): require_once('/home/otpsxxdu/...')
+#3 {main}
+  thrown in /home/otpsxxdu/public_html/include/connect.php on line 2

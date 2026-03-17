@@ -1,0 +1,18 @@
+[02-Mar-2026 12:06:49 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.system_settings' doesn't exist in /home/otpsxxdu/public_html/api/telegram/getPackages.php:22
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/telegram/getPackages.php(22): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/telegram/getPackages.php on line 22
+[02-Mar-2026 12:09:19 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.general_settings' doesn't exist in /home/otpsxxdu/public_html/api/telegram/getPackages.php:22
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/telegram/getPackages.php(22): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/telegram/getPackages.php on line 22
+[02-Mar-2026 12:47:38 Africa/Lagos] PHP Warning:  Undefined array key "myself" in /home/otpsxxdu/public_html/api/telegram/validateRecipient.php on line 154
+[02-Mar-2026 13:01:50 Africa/Lagos] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'otpsxxdu_otpsuite.system_settings' doesn't exist in /home/otpsxxdu/public_html/api/telegram/placeOrder.php:103
+Stack trace:
+#0 /home/otpsxxdu/public_html/api/telegram/placeOrder.php(103): mysqli_query()
+#1 {main}
+  thrown in /home/otpsxxdu/public_html/api/telegram/placeOrder.php on line 103
+[02-Mar-2026 20:40:54 Africa/Lagos] PHP Warning:  Undefined array key "amount_usd" in /home/otpsxxdu/public_html/api/telegram/validateRecipient.php on line 119
+[02-Mar-2026 20:41:32 Africa/Lagos] PHP Warning:  Undefined array key "amount_usd" in /home/otpsxxdu/public_html/api/telegram/validateRecipient.php on line 121
