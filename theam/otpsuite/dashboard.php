@@ -125,6 +125,7 @@ include 'include/header-main.php';
         --ds-danger: #fca5a5;
     }
     body.dark-mode .tx-item{ background: var(--ds-card); }
+    .broadcast-message { word-break: break-word; max-height: 60vh; overflow-y: auto; }
     body.dark-mode .tx-avatar{ color: rgba(255,255,255,.9); background: radial-gradient(circle at 30% 20%, rgba(99,102,241,.22), rgba(0,0,0,0)); }
     body.dark-mode .ds-card{ box-shadow: 0 1px 0 rgba(0,0,0,.25); }
 </style>
@@ -457,6 +458,25 @@ include 'include/header-main.php';
         include("include/bottom-menu.php")
     ?>
 </div>
+<!-- LOGIN BROADCAST (vital info, once per session) -->
+<div class="modal fade dialogbox" id="BroadcastPopup" tabindex="-1" role="dialog">
+    <div class="modal-dialog logout" role="document">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <ion-icon name="megaphone-outline"></ion-icon>
+            </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="broadcastTitle">Announcement</h5>
+            </div>
+            <div class="modal-body">
+                <div id="broadcastMessage" class="broadcast-message"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="broadcastGotIt">Got it</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- AUTO NOTIFICATION DIALOG -->
 <div class="modal fade dialogbox" id="NotificationPopup" tabindex="-1" role="dialog">
     <div class="modal-dialog logout" role="document">
@@ -540,41 +560,40 @@ include 'include/header-main.php';
         const token = $('#token').val();
         if(!token) return;
 
-        $.getJSON("api/notifications/getUnreadPopup.php",{token},function(res){
-
-            if(res.status !== 200) return;
-
-            const n = res.data;
-
-            $("#popupTitle").text(n.title);
-            $("#popupPreview").html(n.preview);
-            $("#popupTime").text(n.created_at);
-
-            const modal = new bootstrap.Modal(document.getElementById('NotificationPopup'));
-            modal.show();
-
-            // READ MORE
-            $("#popupReadMore").off().on("click",function(){
-                window.location.href = "notifications?open=" + n.id;
+        function showNotificationPopup() {
+            $.getJSON("api/notifications/getUnreadPopup.php",{token},function(res){
+                if(res.status !== 200) return;
+                const n = res.data;
+                $("#popupTitle").text(n.title);
+                $("#popupPreview").html(n.preview);
+                $("#popupTime").text(n.created_at);
+                const modal = new bootstrap.Modal(document.getElementById('NotificationPopup'));
+                modal.show();
+                $("#popupReadMore").off().on("click",function(){ window.location.href = "notifications?open=" + n.id; });
+                $("#popupDismiss").off().on("click",function(){ modal.hide(); });
+                $("#popupDontShow").off().on("click",function(){
+                    $.post("api/notifications/dismissNotification.php",{id:n.id,token},function(){ modal.hide(); });
+                });
             });
+        }
 
-            // DISMISS (temporary)
-            $("#popupDismiss").off().on("click",function(){
-                modal.hide();
-            });
-
-            // DON'T SHOW AGAIN
-            $("#popupDontShow").off().on("click",function(){
-                $.post("api/notifications/dismissNotification.php",
-                    {id:n.id,token},
-                    function(){
-                        modal.hide();
-                    }
-                );
-            });
-
+        // Login broadcast (vital info) – show once per session, then notification if any
+        $.getJSON("api/broadcast/get.php",{token},function(res){
+            if(res.status === 200 && !sessionStorage.getItem('broadcast_dismissed')){
+                const b = res.data;
+                $("#broadcastTitle").text(b.title);
+                $("#broadcastMessage").html(b.message);
+                const broadcastModal = new bootstrap.Modal(document.getElementById('BroadcastPopup'));
+                broadcastModal.show();
+                $("#broadcastGotIt").off().on("click",function(){
+                    sessionStorage.setItem('broadcast_dismissed','1');
+                    broadcastModal.hide();
+                    showNotificationPopup();
+                });
+            } else {
+                showNotificationPopup();
+            }
         });
-
     });
 
 </script>

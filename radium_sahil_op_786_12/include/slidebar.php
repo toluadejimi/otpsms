@@ -31,6 +31,11 @@
           <i class="fas fa-fw fa-user-cog"></i>
           <span>Show Notifications</span></a>
       </li>
+      <li class="nav-item" id="broadcast">
+        <a class="nav-link " href="broadcast">
+          <i class="fas fa-fw fa-bullhorn"></i>
+          <span>Login Broadcast</span></a>
+      </li>
       <li class="nav-item" id="boosting_api_home">
         <a class="nav-link" href="boosting_api_home">
           <i class="fas fa-fw fa-phone-square"></i>
