@@ -418,8 +418,99 @@ ${(Array.isArray(enabledGateways) && enabledGateways.includes('sprintpay')) ? `
     </div>
 </div>
 ` : ``}
+${(Array.isArray(enabledGateways) && (enabledGateways.includes('paymentpoint') || enabledGateways.includes('paypoint'))) ? `
+<div class="mt-3 rounded border-double rounded-lg dark:border-[#4B0082] border-2 border-indigo-200">
+    <div class="card flex items-center justify-between py-1">
+        <div class="flex space-y-2">
+            <div class="flex-shrink-0" style="margin-left:5px">
+                <img src="img/paymentpoint.png" alt="PaymentPoint" class="mt-2 me-3 h-8 w-8" onerror="this.src='img/svg/155-credit-card.svg';" />
+            </div>
+            <div class="flex-grow-1" style="margin-left:5px">
+                <p class="mb-0" style="font-size: 15px; font-weight: bold;">PaymentPoint Virtual Account</p>
+                <p class="text-sm mb-0" style="font-size: 14px;">Pay using your PaymentPoint virtual account</p>
+            </div>
+        </div>
+        <span class="btn btn-primary" style="margin: 0rem 0.3rem 0rem 0rem;">
+        <div class="flex-shrink-0 pointer" onclick="paymentpointAccount()">
+            <i class="fa fa-arrow-right text-2xl "></i>
+        </div>
+        </span>
+    </div>
+</div>
+` : ``}
 `;
         //    at = end.split(":");
+}
+
+function paymentpointAccount(){
+    Notiflix.Block.Dots('#cards_page', 'Loading...');
+    $.ajax({
+        type: "POST",
+        url: "api/paymentpoint/get_bank_account.php",
+        data: { token: document.getElementById("tokens").value },
+        success: function(resp) {
+            Notiflix.Block.Remove('#cards_page');
+            var json = typeof resp === 'string' ? JSON.parse(resp) : resp;
+            if (json.status === "1") {
+                showAccountCard(json.data, 'PaymentPoint', 'img/paymentpoint.png');
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "api/paymentpoint/generate_bank_account.php",
+                    data: { token: document.getElementById("tokens").value },
+                    success: function(r2) {
+                        var j2 = typeof r2 === 'string' ? JSON.parse(r2) : r2;
+                        if (j2.status === "1") {
+                            showAccountCard(j2.data, 'PaymentPoint', 'img/paymentpoint.png');
+                        } else {
+                            if (typeof notyf !== 'undefined') notyf.error(j2.msg || 'PaymentPoint account not available.');
+                            back();
+                        }
+                    },
+                    error: function() {
+                        if (typeof notyf !== 'undefined') notyf.error('Something went wrong.');
+                        back();
+                    }
+                });
+            }
+        },
+        error: function() {
+            Notiflix.Block.Remove('#cards_page');
+            if (typeof notyf !== 'undefined') notyf.error('Something went wrong.');
+            back();
+        }
+    });
+}
+
+function showAccountCard(account, label, logo){
+    document.getElementById("cards_page").innerHTML = `
+<div class="card shadow-base2">
+    <div class="card-text space-y-2">
+        <div class="mb-2 flex p-2">
+            <div class="flex-shrink-0 mt-1 p-1 pointer " onclick="back()">
+                <i class="fa fa-arrow-left text-2xl"></i>
+            </div>
+            <div class="flex-grow-1" style="margin-left:10px">
+                <p class="mb-0" style="font-size: 15px; font-weight: bold;">${label} Account</p>
+                <p class="text-sm mb-2" style="font-size: 12px;">Transfer to the account below to fund your wallet</p>
+            </div>
+        </div>
+        <center>
+            <img src="${logo}" height="60" onerror="this.style.display='none'">
+        </center>
+        <div class="p-2">
+            <div class="mb-2" style="font-size:12px;">Account Number</div>
+            <div class="flex items-center justify-between">
+                <div style="font-weight:900;font-size:20px;">${account.account_number || ''}</div>
+                <button class="btn btn-sm btn-outline-primary" onclick="copy('${account.account_number || ''}')">Copy</button>
+            </div>
+            <div class="mt-3" style="font-size:12px;">Account Name</div>
+            <div style="font-weight:700;">${account.account_name || ''}</div>
+            <div class="mt-3" style="font-size:12px;">Bank</div>
+            <div style="font-weight:700;">${account.bank_name || label}</div>
+        </div>
+    </div>
+</div>`;
 }
 function bharatpe(){
 document.getElementById("cards_page").innerHTML = `    

@@ -13,6 +13,7 @@ if (isset($conn)) {
     }
 }
 $sprintpay_enabled = in_array('sprintpay', $enabled_gateway_names, true);
+$paymentpoint_enabled = in_array('paymentpoint', $enabled_gateway_names, true) || in_array('paypoint', $enabled_gateway_names, true);
 ?>
 <div id="app">
     <div class="container-fluid p-0">
@@ -52,6 +53,20 @@ $sprintpay_enabled = in_array('sprintpay', $enabled_gateway_names, true);
                         <div>
                             <strong>SprintPay Virtual Account</strong>
                             <p class="my-2">Pay using your dedicated virtual account</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <?php } ?>
+
+            <?php if ($paymentpoint_enabled) { ?>
+            <li>
+                <a href="#" class="item" onclick="loadPaymentPointAccount()">
+                    <img src="img/paymentpoint.png" alt="PaymentPoint" class="image" onerror="this.src='img/svg/155-credit-card.svg';this.alt='PaymentPoint';">
+                    <div class="in">
+                        <div>
+                            <strong>PaymentPoint Virtual Account</strong>
+                            <p class="my-2">Pay using your PaymentPoint virtual account</p>
                         </div>
                     </div>
                 </a>
@@ -204,6 +219,85 @@ function loadSprintPayVirtualAccount() {
             backToMethods();
         }
     });
+}
+
+function loadPaymentPointAccount() {
+    $('#walletMethodsList').hide();
+    $('#sprintPayAmountContainer').hide();
+
+    $.ajax({
+        type: "POST",
+        url: "api/paymentpoint/get_bank_account.php",
+        data: { token: "<?php echo $_SESSION['token']; ?>" },
+        success: function(response) {
+            var json = typeof response === 'string' ? JSON.parse(response) : response;
+            if (json.status === "1") {
+                renderGenericAccountView(json.data, 'PaymentPoint', 'img/paymentpoint.png');
+            } else {
+                // Try generate (may fail if provider not integrated)
+                $.ajax({
+                    type: "POST",
+                    url: "api/paymentpoint/generate_bank_account.php",
+                    data: { token: "<?php echo $_SESSION['token']; ?>" },
+                    success: function(r2) {
+                        var j2 = typeof r2 === 'string' ? JSON.parse(r2) : r2;
+                        if (j2.status === "1") {
+                            renderGenericAccountView(j2.data, 'PaymentPoint', 'img/paymentpoint.png');
+                        } else {
+                            notyf.error(j2.msg || 'PaymentPoint account not available.');
+                            backToMethods();
+                        }
+                    },
+                    error: function() {
+                        notyf.error("Something went wrong.");
+                        backToMethods();
+                    }
+                });
+            }
+        },
+        error: function() {
+            notyf.error("Something went wrong.");
+            backToMethods();
+        }
+    });
+}
+
+function renderGenericAccountView(account, label, logo) {
+    $('#sprintPayAmountContainer').hide();
+    $('#virtualAccountContainer').html(`
+        <div class="card text-dark p-3" style="border-radius:16px;">
+            <div class="pointer fs-3 mb-2" onclick="backToMethods()">
+                <i class="ri-arrow-left-line icon md hydrated"></i>
+            </div>
+            <div class="text-center">
+                <img src="${logo}" height="100" onerror="this.style.display='none'"><br>
+                <div class="mb-2" style="font-weight:700;font-size:18px;">${label} Account</div>
+                <div class="text-muted" style="font-size:13px;">Transfer to the account below to fund your wallet</div>
+            </div>
+
+            <div class="mt-3">
+                <div class="mb-2" style="font-size:12px;color:#6b7280;">Account Number</div>
+                <div class="d-flex align-items-center justify-content-between" style="gap:10px;">
+                    <div style="font-weight:900;font-size:18px;letter-spacing:.5px;">${account.account_number || ''}</div>
+                    <button class="btn btn-sm btn-outline-primary" onclick="copyText('${account.account_number || ''}')">Copy</button>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <div class="mb-2" style="font-size:12px;color:#6b7280;">Account Name</div>
+                <div style="font-weight:700;">${account.account_name || ''}</div>
+            </div>
+
+            <div class="mt-3">
+                <div class="mb-2" style="font-size:12px;color:#6b7280;">Bank</div>
+                <div style="font-weight:700;">${account.bank_name || label}</div>
+            </div>
+
+            <div class="mt-3 alert alert-warning" style="font-size:12px;">
+                Please transfer from an account you own. Wallet credit depends on provider webhook confirmation.
+            </div>
+        </div>
+    `).show();
 }
 
 function renderAccountView(account) {
