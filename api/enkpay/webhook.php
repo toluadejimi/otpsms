@@ -105,8 +105,37 @@ if ($gq && $gw = $gq->fetch_assoc()) {
     $gateway_id = (int) $gw['id'];
 }
 
+$gateway_id_safe = 0;
+if ($gateway_id > 0) {
+    $gateway_id_safe = (int) $gateway_id;
+} else {
+    // Ensure gateway_id is a valid FK reference (never use 0).
+    // Some schemas require business_id (NOT NULL). Reuse an existing business_id if present, else default to 1.
+    $biz_id = 1;
+    $biz_q = mysqli_query($conn, "SELECT business_id FROM payment_gateways WHERE business_id IS NOT NULL LIMIT 1");
+    if ($biz_q && $biz_row = mysqli_fetch_assoc($biz_q)) {
+        $biz_id = (int) ($biz_row['business_id'] ?? 1);
+        if ($biz_id <= 0) $biz_id = 1;
+    }
+
+    $name_s = mysqli_real_escape_string($conn, 'Enkpay');
+    @mysqli_query($conn, "INSERT INTO payment_gateways (business_id, name, api_key, secret_key, status) VALUES ('$biz_id', '$name_s', '', '', 1)");
+    $new_id = (int) mysqli_insert_id($conn);
+    if ($new_id > 0) {
+        $gateway_id_safe = $new_id;
+    } else {
+        // Absolute fallback: use any existing gateway id to satisfy FK.
+        $any = $conn->query("SELECT id FROM payment_gateways ORDER BY id ASC LIMIT 1");
+        if ($any && $row = $any->fetch_assoc()) {
+            $gateway_id_safe = (int) $row['id'];
+        }
+    }
+}
+
+$gateway_id_sql = $gateway_id_safe > 0 ? (string) $gateway_id_safe : 'NULL';
+
 $conn->query("INSERT INTO user_transaction (user_id, amount, date, type, gateway_id, txn_id, status) 
-              VALUES ('$user_id_safe', '$amount_safe', '$current_time', 'Enkpay', '$gateway_id', '$ref_safe', '1')");
+              VALUES ('$user_id_safe', '$amount_safe', '$current_time', 'Enkpay', $gateway_id_sql, '$ref_safe', '1')");
 
 $wallet_q = $conn->query("SELECT balance, total_recharge FROM user_wallet WHERE user_id = '$user_id_safe' LIMIT 1");
 $wallet_data = $wallet_q ? $wallet_q->fetch_assoc() : null;
