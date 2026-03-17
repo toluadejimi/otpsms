@@ -17,8 +17,16 @@ if (isset($conn)) {
         }
     }
 }
-$sprintpay_enabled = in_array('sprintpay', $enabled_gateway_names, true);
-$paymentpoint_enabled = in_array('paymentpoint', $enabled_gateway_names, true) || in_array('paypoint', $enabled_gateway_names, true);
+$sprintpay_enabled = false;
+$paymentpoint_enabled = false;
+foreach ($enabled_gateway_names as $gwName) {
+    $gwName = (string)$gwName;
+    if (!$sprintpay_enabled && strpos($gwName, 'sprintpay') !== false) $sprintpay_enabled = true;
+    if (
+        !$paymentpoint_enabled
+        && (strpos($gwName, 'paymentpoint') !== false || strpos($gwName, 'paypoint') !== false)
+    ) $paymentpoint_enabled = true;
+}
 ?>
 <div id="app">
     <div class="container-fluid p-0">

@@ -30,6 +30,9 @@ if (isset($conn)) {
 <script>
   // Enabled gateways from admin (payment_gateways.status=1)
   var enabledGateways = <?php echo json_encode($enabled_gateway_names); ?>;
+  // helper flags (match substrings, not only exact names)
+  var hasPaymentPoint = Array.isArray(enabledGateways) && enabledGateways.some(function(n){ return (String(n).indexOf('paymentpoint') !== -1) || (String(n).indexOf('paypoint') !== -1); });
+  var hasSprintPay = Array.isArray(enabledGateways) && enabledGateways.some(function(n){ return String(n).indexOf('sprintpay') !== -1; });
 </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -422,7 +425,7 @@ ${(Array.isArray(enabledGateways) && enabledGateways.includes('sprintpay')) ? `
     </div>
 </div>
 ` : ``}
-${(Array.isArray(enabledGateways) && (enabledGateways.includes('paymentpoint') || enabledGateways.includes('paypoint'))) ? `
+${(typeof hasPaymentPoint !== 'undefined' && hasPaymentPoint) ? `
 <div class="mt-3 rounded border-double rounded-lg dark:border-[#4B0082] border-2 border-indigo-200">
     <div class="card flex items-center justify-between py-1">
         <div class="flex space-y-2">
