@@ -25,8 +25,11 @@ if (!is_array($body)) {
 $payload = $body['payload'] ?? $body['data'] ?? $body;
 
 // EnKash-style: quickCollectRequestId, type, amount, paymentStatus, paymentDate
-// Also support generic: order_id, reference, email, amount_paid, total
-$paymentStatus = strtoupper(trim((string) ($payload['paymentStatus'] ?? $payload['status'] ?? $body['paymentStatus'] ?? $body['status'] ?? '')));
+// Also support: order_id, session_id, account_no, email, amount (no status = assume success)
+$paymentStatus = strtoupper(trim((string) (
+    $payload['paymentStatus'] ?? $payload['status'] ?? $payload['transaction_status'] ?? $payload['payment_status'] ??
+    $body['paymentStatus'] ?? $body['status'] ?? $body['transaction_status'] ?? $body['payment_status'] ?? ''
+)));
 $amount = (float) ($payload['amount'] ?? $payload['amount_paid'] ?? $payload['total'] ?? $body['amount'] ?? 0);
 $email = trim((string) ($payload['email'] ?? $payload['customer_email'] ?? $body['email'] ?? ''));
 $orderId = trim((string) ($payload['order_id'] ?? $payload['ref'] ?? $payload['reference'] ?? $body['order_id'] ?? ''));
@@ -34,8 +37,11 @@ $quickCollectId = trim((string) ($payload['quickCollectRequestId'] ?? $body['qui
 $accountNo = trim((string) ($payload['account_no'] ?? $body['account_no'] ?? ''));
 $reference = $orderId ?: $quickCollectId ?: ('enk-' . ($body['transaction_id'] ?? uniqid('', true)));
 
-// Only credit on success
-if ($paymentStatus !== 'SUCCESS' && $paymentStatus !== '1' && $paymentStatus !== 'COMPLETED') {
+// Only credit on success. If no status field, treat as success when we have a valid payment payload (Enkpay often only calls webhook on success).
+$statusOk = in_array($paymentStatus, ['SUCCESS', '1', 'COMPLETED', 'PAID', 'COMPLETE'], true);
+$noStatusButValidPayload = ($paymentStatus === '' && $amount > 0 && ($orderId !== '' || $quickCollectId !== ''));
+
+if (!$statusOk && !$noStatusButValidPayload) {
     http_response_code(200);
     echo json_encode(['success' => true, 'message' => 'Status not success, skipped', 'status' => $paymentStatus]);
     exit;
