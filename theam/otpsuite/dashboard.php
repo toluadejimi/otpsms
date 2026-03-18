@@ -55,6 +55,7 @@ include 'include/header-main.php';
         text-transform: uppercase;
         font-size: 12px;
         margin:0;
+        color:#fff !important;
     }
     .ds-section-icon{
         width: 26px; height: 26px; border-radius: 10px;
@@ -100,6 +101,7 @@ include 'include/header-main.php';
     .tx-sub{ margin:2px 0 0 0; font-size: 11px; color: var(--ds-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px; }
     .tx-right{ display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex:0 0 auto; }
     .tx-amount{ font-weight: 900; font-size: 12px; color: var(--ds-success); background: var(--ds-success-bg); border: 1px solid rgba(17,107,61,.18); padding: 5px 10px; border-radius: 999px; }
+    .tx-amount.debit{ color: var(--ds-danger); background: var(--ds-danger-bg); border-color: rgba(153,27,27,.18); }
     .tx-status{ font-weight: 800; font-size: 11px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--ds-border-strong); background: var(--ds-pill); color: var(--ds-text); }
     .tx-status.success{ background: var(--ds-success-bg); color: var(--ds-success); border-color: rgba(17,107,61,.18); }
     .tx-status.pending{ background: var(--ds-warning-bg); color: var(--ds-warning); border-color: rgba(154,52,18,.18); }
@@ -415,9 +417,18 @@ include 'include/header-main.php';
                             $type = (string)($transaction['type'] ?? '');
                             $avatar = strtoupper(substr(preg_replace('/[^A-Za-z0-9]+/', '', $type), 0, 1));
                             if($avatar === '') $avatar = '₦';
+
+                            $direction = strtolower((string)($transaction['direction'] ?? 'credit'));
+                            $isDebit = ($direction === 'debit');
+                            $amountPrefix = $isDebit ? '- ₦' : '+ ₦';
+                            $amountClass = $isDebit ? 'tx-amount debit' : 'tx-amount';
+                            $href = '#';
+                            if (!empty($transaction['order_id'])) {
+                                $href = 'log-order-details?order_id=' . urlencode((string)$transaction['order_id']);
+                            }
                     ?>
                     <!-- item -->
-                    <a href="#" class="tx-item">
+                    <a href="<?php echo htmlspecialchars($href); ?>" class="tx-item">
                         <div class="tx-left">
                             <div class="tx-avatar"><?php echo htmlspecialchars($avatar); ?></div>
                             <div class="tx-meta">
@@ -426,7 +437,7 @@ include 'include/header-main.php';
                             </div>
                         </div>
                         <div class="tx-right">
-                            <div class="tx-amount">+ ₦<?php echo number_format((float)$transaction['amount'], 2);?></div>
+                            <div class="<?php echo $amountClass; ?>"><?php echo $amountPrefix; ?><?php echo number_format((float)$transaction['amount'], 2);?></div>
                             <div class="tx-status <?php echo $statusClass; ?>"><?php echo $statusText; ?></div>
                         </div>
                     </a>

@@ -388,20 +388,69 @@ public function generateRandomString32($length = 32) {
     if($user_id === false){
     return false;
     }else{
-        $final = array(); // Initialize an empty array to store results
+        $final = array(); // merged timeline
 
-    $sql = mysqli_query($this->conn, "SELECT * FROM `user_transaction` WHERE user_id='".$user_id."' ORDER BY id DESC LIMIT 15 ");
-    
-    while ($row = $sql->fetch_array()) {
-        array_push($final, array(
-            'amount' => $row['amount'],
-            'date' => $row['date'],
-            'type' => $row['type'],
-            'txn_id' => $row['txn_id'],  
-            'status' => $row['status'],    
-        ));
-    }
-    
+        // 1) Wallet transactions (credits, etc.)
+        $sql = mysqli_query($this->conn, "SELECT * FROM `user_transaction` WHERE user_id='".$user_id."' ORDER BY id DESC LIMIT 15 ");
+        while ($sql && ($row = $sql->fetch_array())) {
+            $final[] = array(
+                'amount' => $row['amount'],
+                'date' => $row['date'],
+                'type' => $row['type'],
+                'txn_id' => $row['txn_id'],
+                'status' => $row['status'],
+                'direction' => 'credit',
+                'source' => 'transaction',
+            );
+        }
+
+        // 2) Log/product orders (debits)
+        // Use created_at when available; fallback to id ordering.
+        $orders = mysqli_query($this->conn, "
+            SELECT
+                o.id AS order_id,
+                o.total_amount,
+                o.status,
+                o.created_at,
+                COUNT(oi.id) AS num_items,
+                MAX(p.name) AS product_name
+            FROM orders o
+            INNER JOIN order_items oi ON o.id = oi.order_id
+            INNER JOIN products p ON oi.product_id = p.id
+            WHERE o.user_id = '".$user_id."'
+            GROUP BY o.id
+            ORDER BY o.id DESC
+            LIMIT 15
+        ");
+
+        while ($orders && ($o = $orders->fetch_array())) {
+            $pname = (string)($o['product_name'] ?? 'Order');
+            $items = (int)($o['num_items'] ?? 0);
+            $label = $items > 1 ? ($pname . " ×" . $items) : $pname;
+            $final[] = array(
+                'amount' => $o['total_amount'],
+                'date' => $o['created_at'] ?? '',
+                'type' => 'Order: ' . $label,
+                'txn_id' => 'order-' . $o['order_id'],
+                'status' => $o['status'],
+                'direction' => 'debit',
+                'source' => 'order',
+                'order_id' => $o['order_id'],
+            );
+        }
+
+        // Sort merged by date desc (fallback to txn_id ordering if date missing)
+        usort($final, function($a, $b){
+            $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
+            $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
+            if ($ta === $tb) return 0;
+            return ($tb <=> $ta);
+        });
+
+        // Keep only latest 15 in merged view
+        if (count($final) > 15) {
+            $final = array_slice($final, 0, 15);
+        }
     }
     return $final;
    }  
