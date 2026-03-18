@@ -106,6 +106,148 @@ include 'include/header-main.php';
     .tx-status.success{ background: var(--ds-success-bg); color: var(--ds-success); border-color: rgba(17,107,61,.18); }
     .tx-status.pending{ background: var(--ds-warning-bg); color: var(--ds-warning); border-color: rgba(154,52,18,.18); }
     .tx-status.cancelled{ background: var(--ds-danger-bg); color: var(--ds-danger); border-color: rgba(153,27,27,.18); }
+    .ds-activities-table{
+        width:100%;
+        border-collapse:separate;
+        border-spacing:0;
+    }
+    .ds-activities-table th{
+        text-align:left;
+        font-size:11px;
+        color: var(--ds-muted);
+        font-weight:800;
+        padding: 10px 10px;
+        border-bottom: 1px solid var(--ds-border-card);
+    }
+    .ds-activities-table td{
+        font-size:12px;
+        padding: 10px 10px;
+        border-bottom: 1px solid rgba(0,0,0,.04);
+        color: var(--ds-text);
+        vertical-align:middle;
+    }
+    body.dark-mode .ds-activities-table td{
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    /* Recent Activity feed (home page) */
+    .ra-header{
+        background: linear-gradient(90deg, #6D28D9 0%, #7C3AED 55%, #5B21B6 100%);
+        color:#fff;
+        padding: 14px 14px;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        border-radius: 16px;
+        margin-bottom: 12px;
+    }
+    .ra-header-icon{
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        background: rgba(255,255,255,.14);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:900;
+    }
+    .ra-header-title{ font-size: 14px; font-weight: 900; line-height:1.1; }
+    .ra-header-sub{ font-size: 11px; color: rgba(255,255,255,.85); margin-top: 2px; }
+
+    .ra-item{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        gap: 12px;
+        background: rgba(255,255,255,.65);
+        border: 1px solid var(--ds-border-card);
+        border-radius: 16px;
+        padding: 12px 12px;
+        margin-bottom: 10px;
+    }
+    body.dark-mode .ra-item{
+        background: rgba(255,255,255,.04);
+    }
+    .ra-left{
+        display:flex;
+        align-items:center;
+        gap:12px;
+        min-width: 0;
+    }
+    .ra-icon{
+        width: 46px;
+        height: 46px;
+        border-radius: 16px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex: 0 0 auto;
+        font-weight:900;
+        border: 1px solid rgba(255,255,255,.12);
+    }
+    .ra-icon.order{
+        background: rgba(99,102,241,.18);
+        color: #A5B4FC;
+        border-color: rgba(99,102,241,.30);
+    }
+    .ra-icon.deposit{
+        background: rgba(16,185,129,.16);
+        color: #34D399;
+        border-color: rgba(16,185,129,.25);
+    }
+    .ra-center{ min-width:0; }
+    .ra-user{
+        font-size: 13px;
+        font-weight: 900;
+        color: var(--ds-text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    body.dark-mode .ra-user{ color: var(--ds-text); }
+    .ra-desc{
+        margin-top: 4px;
+        font-size: 11px;
+        color: var(--ds-muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 220px;
+    }
+    .ra-right{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-end;
+        gap: 8px;
+        flex: 0 0 auto;
+    }
+    .ra-badge{
+        display:flex;
+        align-items:center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 900;
+        border: 1px solid var(--ds-border-card);
+        background: var(--ds-pill);
+        color: var(--ds-text);
+    }
+    .ra-badge.order{
+        background: rgba(99,102,241,.18);
+        border-color: rgba(99,102,241,.30);
+        color: #A5B4FC;
+    }
+    .ra-badge.deposit{
+        background: rgba(16,185,129,.16);
+        border-color: rgba(16,185,129,.25);
+        color: #34D399;
+    }
+    .ra-time{
+        font-size: 11px;
+        color: var(--ds-muted);
+        white-space: nowrap;
+    }
 
     /* Dark mode overrides (theme uses body.dark-mode) */
     body.dark-mode{
@@ -383,6 +525,116 @@ include 'include/header-main.php';
                 </div>
             </div>
             <!-- Summary -->
+            <?php ob_start(); ?>
+
+            <!-- Recent Activities -->
+            <div class="section mt-4 p-0">
+                <div class="ds-card">
+                    <div class="ds-body">
+                        <?php
+                            $raEvents = is_array($recent_activities ?? null) ? $recent_activities : [];
+
+                            $maskUser = function($name){
+                                $name = trim((string)$name);
+                                if ($name === '') return 'User***';
+                                $len = strlen($name);
+                                if ($len <= 2) return substr($name, 0, 1) . '***';
+                                if ($len <= 4) return substr($name, 0, 1) . '***' . substr($name, -1);
+                                return substr($name, 0, 2) . '***' . substr($name, -1);
+                            };
+
+                            $timeAgo = function($dateStr){
+                                $ts = strtotime((string)$dateStr);
+                                if (!$ts) return '';
+                                $diff = time() - $ts;
+                                if ($diff < 60) return 'Just now';
+                                $m = floor($diff / 60);
+                                if ($m < 60) return $m . 'm ago';
+                                $h = floor($m / 60);
+                                if ($h < 24) return $h . 'h ago';
+                                $d = floor($h / 24);
+                                return $d . 'd ago';
+                            };
+                        ?>
+
+                        <div class="ra-header">
+                            <div class="ra-header-icon">
+                                <i class="ri-broadcast-line"></i>
+                            </div>
+                            <div>
+                                <div class="ra-header-title">Recent Activity</div>
+                                <div class="ra-header-sub">Latest orders and deposits</div>
+                            </div>
+                        </div>
+
+                        <?php if (!empty($raEvents)) { ?>
+                            <div>
+                                <?php foreach ($raEvents as $ev) {
+                                    $direction = strtolower((string)($ev['direction'] ?? 'credit'));
+                                    $isDebit = ($direction === 'debit');
+
+                                    $userName = (string)($ev['user_name'] ?? '');
+                                    $maskedUser = $maskUser($userName);
+
+                                    $amount = (float)($ev['amount'] ?? 0);
+                                    $status = (string)($ev['status'] ?? '0');
+
+                                    $statusText = 'Cancelled';
+                                    if ($status === '1') $statusText = 'Success';
+                                    elseif ($status === '2') $statusText = 'Pending';
+
+                                    $timeText = $timeAgo($ev['date'] ?? '');
+
+                                    if ($isDebit) {
+                                        $badgeText = 'Order';
+                                        $badgeClass = 'order';
+                                        $iconClass = 'order';
+                                        $icon = 'ri-shopping-cart-line';
+                                        $desc = 'Purchased ' . trim((string)($ev['activity_text'] ?? ''));
+                                        $sub = '';
+                                    } else {
+                                        $badgeText = 'Deposit';
+                                        $badgeClass = 'deposit';
+                                        $iconClass = 'deposit';
+                                        $icon = 'ri-arrow-down-circle-line';
+                                        $provider = trim((string)($ev['activity_text'] ?? 'Deposit'));
+                                        $desc = 'Funded ₦' . number_format($amount, 0) . ' via ' . $provider;
+                                        $sub = $statusText;
+                                    }
+                                ?>
+                                    <div class="ra-item">
+                                        <div class="ra-left">
+                                            <div class="ra-icon <?php echo $iconClass; ?>">
+                                                <i class="<?php echo $icon; ?>"></i>
+                                            </div>
+                                            <div class="ra-center">
+                                                <div class="ra-user"><?php echo htmlspecialchars($maskedUser); ?></div>
+                                                <div class="ra-desc"><?php echo htmlspecialchars($desc); ?></div>
+                                            </div>
+                                        </div>
+                                        <div class="ra-right">
+                                            <div class="ra-badge <?php echo $badgeClass; ?>">
+                                                <i class="ri-bank-card-line"></i>
+                                                <?php echo htmlspecialchars($badgeText); ?>
+                                            </div>
+                                            <?php if ($timeText !== '') { ?>
+                                                <div class="ra-time"><?php echo htmlspecialchars($timeText); ?></div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php } else { ?>
+                            <div class="transactions-empty" style="background:var(--ds-card);border:1px solid var(--ds-border-card);border-radius:16px;padding:16px;">
+                                <img src="<?php echo WEBSITE_URL; ?>/theam/otpsuite/assets/image/empty.gif" alt="empty box">
+                                <p>No Recent Activity Found</p>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+            <!-- * Recent Activities -->
+            <?php $recentActivitiesHtml = ob_get_clean(); ?>
 
             <!-- Transactions -->
             <div class="section mt-4 p-0">
@@ -462,6 +714,7 @@ include 'include/header-main.php';
                 </div>
             </div>
             <!-- * Transactions -->
+            <?php if (!empty($recentActivitiesHtml)) { echo $recentActivitiesHtml; } ?>
         </div>
     </div> 
 

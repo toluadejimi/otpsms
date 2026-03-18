@@ -10,6 +10,7 @@ $userdata = $wallet->userdata();
 $userwallet = $wallet->userwallet();
 $referwallet = $wallet->refer_data();
 $recent_history = $wallet->recent_history();
+$recent_activities = $wallet->recent_activities();
 $unread_notifications=$wallet->unread_notifications_count();
 if($data===false){
 	unset($_SESSION['token']);
