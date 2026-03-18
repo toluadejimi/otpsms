@@ -544,9 +544,38 @@ include 'include/header-main.php';
                             };
 
                             $timeAgo = function($dateStr){
-                                $ts = strtotime((string)$dateStr);
+                                $dateStr = (string)$dateStr;
+                                if (trim($dateStr) === '') return '';
+
+                                $ts = false;
+
+                                // If provider sends unix timestamp (seconds or ms)
+                                if (is_numeric($dateStr)) {
+                                    $n = (float)$dateStr;
+                                    if ($n > 1000000000000) { // ms
+                                        $n = $n / 1000;
+                                    }
+                                    $ts = (int)$n;
+                                } else {
+                                    // If ISO datetime with Z, parse as UTC then convert (avoid timezone drift)
+                                    if (str_ends_with($dateStr, 'Z')) {
+                                        try {
+                                            $dt = new DateTime($dateStr, new DateTimeZone('UTC'));
+                                            $dt->setTimezone(new DateTimeZone('Africa/Lagos'));
+                                            $ts = $dt->getTimestamp();
+                                        } catch (Exception $e) {
+                                            $ts = strtotime($dateStr);
+                                        }
+                                    } else {
+                                        $ts = strtotime($dateStr);
+                                    }
+                                }
+
                                 if (!$ts) return '';
+
                                 $diff = time() - $ts;
+                                if ($diff < 0) $diff = 0;
+
                                 if ($diff < 60) return 'Just now';
                                 $m = floor($diff / 60);
                                 if ($m < 60) return $m . 'm ago';

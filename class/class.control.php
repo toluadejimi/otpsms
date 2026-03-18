@@ -463,85 +463,64 @@ public function generateRandomString32($length = 32) {
         $limit = (int)$limit;
         if ($limit <= 0) $limit = 10;
 
+        $subLimit = max(30, $limit * 3);
         $events = [];
 
-        // 1) Orders (Bought)
-        $orders = mysqli_query($this->conn, "
-            SELECT
-                o.id AS order_id,
-                o.total_amount AS amount,
-                o.status AS status,
-                o.created_at AS date,
-                MAX(u.name) AS user_name,
-                MAX(u.username) AS username,
-                MAX(COALESCE(u.name, u.username, u.email)) AS user_display,
-                COUNT(oi.id) AS num_items,
-                MAX(p.name) AS product_name
-            FROM orders o
-            INNER JOIN order_items oi ON oi.order_id = o.id
-            INNER JOIN products p ON p.id = oi.product_id
-            INNER JOIN user_data u ON u.id = o.user_id
-            GROUP BY o.id
-            ORDER BY o.id DESC
-            LIMIT " . ((int)$limit) . "
-        ");
+        // Use UNION + ORDER BY on date to always fetch the most recent events.
+        $sql = "
+            SELECT x.* FROM (
+                (
+                    SELECT
+                        o.id AS order_id,
+                        NULL AS txn_id,
+                        'debit' AS direction,
+                        'Order' AS type,
+                        o.total_amount AS amount,
+                        o.status AS status,
+                        o.created_at AS date,
+                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        COUNT(oi.id) AS num_items,
+                        CASE
+                            WHEN COUNT(oi.id) > 1 THEN CONCAT(MAX(p.name), ' x', COUNT(oi.id))
+                            ELSE MAX(p.name)
+                        END AS activity_text
+                    FROM orders o
+                    INNER JOIN order_items oi ON oi.order_id = o.id
+                    INNER JOIN products p ON p.id = oi.product_id
+                    INNER JOIN user_data u ON u.id = o.user_id
+                    GROUP BY o.id
+                    ORDER BY o.id DESC
+                    LIMIT {$subLimit}
+                )
+                UNION ALL
+                (
+                    SELECT
+                        NULL AS order_id,
+                        ut.txn_id AS txn_id,
+                        'credit' AS direction,
+                        'Deposit' AS type,
+                        ut.amount AS amount,
+                        ut.status AS status,
+                        ut.date AS date,
+                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        NULL AS num_items,
+                        COALESCE(ut.type, 'Deposit') AS activity_text
+                    FROM user_transaction ut
+                    INNER JOIN user_data u ON u.id = ut.user_id
+                    ORDER BY ut.id DESC
+                    LIMIT {$subLimit}
+                )
+            ) x
+            ORDER BY x.date DESC
+            LIMIT {$limit}
+        ";
 
-        while ($orders && ($o = $orders->fetch_array())) {
-            $product = (string)($o['product_name'] ?? 'Order');
-            $items = (int)($o['num_items'] ?? 0);
-            $productLabel = $items > 1 ? ($product . " x" . $items) : $product;
-
-            $events[] = [
-                'direction' => 'debit',
-                'type' => 'Order',
-                'activity_text' => $productLabel,
-                'amount' => $o['amount'],
-                'status' => $o['status'],
-                'date' => $o['date'],
-                'user_name' => (string)($o['user_display'] ?? $o['user_name'] ?? $o['username'] ?? ''),
-                'txn_id' => 'order-' . (string)($o['order_id'] ?? ''),
-                'order_id' => (int)($o['order_id'] ?? 0),
-            ];
-        }
-
-        // 2) Deposits (from wallet deposits stored in user_transaction)
-        $tx = mysqli_query($this->conn, "
-            SELECT
-                ut.txn_id,
-                ut.amount,
-                ut.status,
-                ut.date,
-                ut.type AS provider,
-                COALESCE(u.name, u.username, u.email) AS user_display
-            FROM user_transaction ut
-            INNER JOIN user_data u ON u.id = ut.user_id
-            ORDER BY ut.id DESC
-            LIMIT " . ((int)$limit) . "
-        ");
-
-        while ($tx && ($t = $tx->fetch_array())) {
-            $events[] = [
-                'direction' => 'credit',
-                'type' => 'Deposit',
-                'activity_text' => (string)($t['provider'] ?? 'Deposit'),
-                'amount' => $t['amount'],
-                'status' => $t['status'],
-                'date' => $t['date'],
-                'user_name' => (string)($t['user_display'] ?? ''),
-                'txn_id' => (string)($t['txn_id'] ?? ''),
-            ];
-        }
-
-        // 3) Merge-sort by date desc and keep latest $limit
-        usort($events, function($a, $b){
-            $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
-            $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
-            if ($ta === $tb) return 0;
-            return ($tb <=> $ta);
-        });
-
-        if (count($events) > $limit) {
-            $events = array_slice($events, 0, $limit);
+        $res = mysqli_query($this->conn, $sql);
+        while ($res && ($ev = $res->fetch_assoc())) {
+            if (empty($ev['txn_id']) && !empty($ev['order_id'])) {
+                $ev['txn_id'] = 'order-' . (string)$ev['order_id'];
+            }
+            $events[] = $ev;
         }
 
         return $events;
