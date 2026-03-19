@@ -402,7 +402,9 @@ function fetchPlans(networkId){
 $("#openPlans").click(()=>$("#plansSheet").modal("show"));
 
 /* Select plan */
-$(document).on("click",".select-plan",function(){
+$(document).on("click",".select-plan",function(e){
+    // Stop <a href="#"> from jumping/reloading
+    e.preventDefault();
     selectedPlan = {
         id:$(this).data("id"),
         name:$(this).data("name"),
@@ -428,6 +430,11 @@ $("#payBtn").click(()=>{
     $("#confirmPhone").text($("#phone").val());
     $("#confirmLogo").attr("src","img/networks/"+NETWORKS[$("#networkSelect").val()].logo);
     $("#confirmSheet").modal("show");
+});
+
+// Prevent navigation for cancel links inside sheets (they use href="#")
+$(document).on("click",'#plansSheet a[href="#"], #confirmSheet a[href="#"]', function(e){
+    e.preventDefault();
 });
 
 /* Confirm payment */
