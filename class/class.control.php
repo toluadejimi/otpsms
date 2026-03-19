@@ -459,141 +459,166 @@ public function generateRandomString32($length = 32) {
         $limit = (int)$limit;
         if ($limit <= 0) $limit = 10;
 
-        $subLimit = max(30, $limit * 3);
+        // Make sure we always show some "orders" (debits) even if deposits are newer.
+        $debitLimit = (int)ceil($limit * 0.4);
+        if ($debitLimit < 2) $debitLimit = 2;
+        $creditLimit = $limit - $debitLimit;
+        if ($creditLimit < 0) $creditLimit = 0;
 
-        // Wrap each UNION component in parentheses because some MySQL/MariaDB versions
-        // are strict about ORDER BY ... LIMIT inside UNION.
+        $debitFetch = max(30, $debitLimit * 3);
+        $creditFetch = max(30, $creditLimit * 3);
+
+        $debits = [];
+        $credits = [];
+
+        // Airtime debits
         $sql = "
-            SELECT x.* FROM (
-                (
-                    SELECT
-                        NULL AS order_id,
-                        CAST(a.api_reference AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
-                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
-                        CAST('Airtime' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
-                        a.amount AS amount,
-                        CASE WHEN a.status = 1 THEN '1' WHEN a.status = 0 THEN '2' ELSE '3' END AS status,
-                        a.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
-                        COALESCE(n.name,'Network') COLLATE utf8mb4_unicode_ci AS network_name,
-                        (CONCAT('Airtime ', COALESCE(n.name,'Network'), ' - ', RIGHT(COALESCE(a.phone,''), 4))) COLLATE utf8mb4_unicode_ci AS activity_text
-                    FROM airtime_orders a
-                    INNER JOIN networks n ON n.id = a.network_id
-                    INNER JOIN user_data u ON u.id = a.user_id
-                    ORDER BY a.id DESC
-                    LIMIT {$subLimit}
-                )
-                UNION ALL
-                (
-                    SELECT
-                        NULL AS order_id,
-                        CAST(d.api_reference AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
-                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
-                        CAST('Data' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
-                        d.amount AS amount,
-                        CASE WHEN d.status = 1 THEN '1' WHEN d.status = 0 THEN '2' ELSE '3' END AS status,
-                        d.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
-                        (CONCAT(COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''))) COLLATE utf8mb4_unicode_ci AS network_name,
-                        (CONCAT('Data ', COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''), ' - ', RIGHT(COALESCE(d.phone,''), 4))) COLLATE utf8mb4_unicode_ci AS activity_text
-                    FROM data_orders d
-                    INNER JOIN data_plans p ON p.id = d.data_plan_id
-                    INNER JOIN networks n ON n.id = p.network_id
-                    INNER JOIN user_data u ON u.id = d.user_id
-                    ORDER BY d.id DESC
-                    LIMIT {$subLimit}
-                )
-                UNION ALL
-                (
-                    SELECT
-                        NULL AS order_id,
-                        CAST(cto.api_reference AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
-                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
-                        CAST('Cable' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
-                        cto.amount AS amount,
-                        CASE WHEN cto.status = 1 THEN '1' WHEN cto.status = 0 THEN '2' ELSE '3' END AS status,
-                        cto.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
-                        COALESCE(cp.name,'Provider') COLLATE utf8mb4_unicode_ci AS network_name,
-                        (CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' - ', RIGHT(COALESCE(cto.smartcard_number,''), 4))) COLLATE utf8mb4_unicode_ci AS activity_text
-                    FROM cable_tv_orders cto
-                    INNER JOIN cable_tv_plans tp ON tp.id = cto.cable_tv_plan_id
-                    INNER JOIN cable_tv_providers cp ON cp.id = tp.cable_id
-                    INNER JOIN user_data u ON u.id = cto.user_id
-                    ORDER BY cto.id DESC
-                    LIMIT {$subLimit}
-                )
-                UNION ALL
-                (
-                    SELECT
-                        NULL AS order_id,
-                        CAST(eo.api_reference AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
-                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
-                        CAST('Electricity' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
-                        eo.amount AS amount,
-                        CASE WHEN eo.status = 1 THEN '1' WHEN eo.status = 0 THEN '2' ELSE '3' END AS status,
-                        eo.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
-                        COALESCE(ep.name,'Provider') COLLATE utf8mb4_unicode_ci AS network_name,
-                        (CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' - ', RIGHT(COALESCE(eo.meter_number,''), 4))) COLLATE utf8mb4_unicode_ci AS activity_text
-                    FROM electricity_orders eo
-                    INNER JOIN electricity_providers ep ON ep.id = eo.electricity_provider_id
-                    INNER JOIN user_data u ON u.id = eo.user_id
-                    ORDER BY eo.id DESC
-                    LIMIT {$subLimit}
-                )
-                UNION ALL
-                (
-                    SELECT
-                        o.id AS order_id,
-                        NULL AS txn_id,
-                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
-                        CAST('Order' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
-                        o.total_amount AS amount,
-                        CASE WHEN o.status = 1 THEN '1' WHEN o.status = 0 THEN '2' ELSE '3' END AS status,
-                        o.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
-                        NULL AS network_name,
-                        (MAX(p.name)) COLLATE utf8mb4_unicode_ci AS activity_text
-                    FROM orders o
-                    INNER JOIN order_items oi ON oi.order_id = o.id
-                    INNER JOIN products p ON p.id = oi.product_id
-                    INNER JOIN user_data u ON u.id = o.user_id
-                    GROUP BY o.id
-                    ORDER BY o.id DESC
-                    LIMIT {$subLimit}
-                )
-                UNION ALL
-                (
-                    SELECT
-                        NULL AS order_id,
-                        CAST(ut.txn_id AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
-                        CAST('credit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
-                        CAST('Deposit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
-                        ut.amount AS amount,
-                        CASE WHEN ut.status = 1 THEN '1' WHEN ut.status = 0 THEN '2' ELSE '3' END AS status,
-                        ut.date AS date,
-                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
-                        NULL AS network_name,
-                        (COALESCE(ut.type, 'Deposit')) COLLATE utf8mb4_unicode_ci AS activity_text
-                    FROM user_transaction ut
-                    INNER JOIN user_data u ON u.id = ut.user_id
-                    ORDER BY ut.id DESC
-                    LIMIT {$subLimit}
-                )
-            ) x
-            ORDER BY x.date DESC
-            LIMIT {$limit}
+            SELECT
+                'debit' AS direction,
+                'Airtime' AS type,
+                a.api_reference AS txn_id,
+                a.amount AS amount,
+                CASE WHEN a.status = 1 THEN '1' WHEN a.status = 0 THEN '2' ELSE '3' END AS status,
+                a.created_at AS date,
+                COALESCE(u.name, u.username, u.email) AS user_name,
+                CONCAT('Airtime ', COALESCE(n.name,'Network'), ' - ', RIGHT(COALESCE(a.phone,''), 4)) AS activity_text
+            FROM airtime_orders a
+            LEFT JOIN networks n ON n.id = a.network_id
+            LEFT JOIN user_data u ON u.id = a.user_id
+            ORDER BY a.id DESC
+            LIMIT {$debitFetch}
         ";
+        $q = mysqli_query($this->conn, $sql);
+        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
 
-        $res = mysqli_query($this->conn, $sql);
-        if (!$res) return [];
+        // Data debits
+        $sql = "
+            SELECT
+                'debit' AS direction,
+                'Data' AS type,
+                d.api_reference AS txn_id,
+                d.amount AS amount,
+                CASE WHEN d.status = 1 THEN '1' WHEN d.status = 0 THEN '2' ELSE '3' END AS status,
+                d.created_at AS date,
+                COALESCE(u.name, u.username, u.email) AS user_name,
+                CONCAT('Data ', COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''), ' - ', RIGHT(COALESCE(d.phone,''), 4)) AS activity_text
+            FROM data_orders d
+            LEFT JOIN data_plans p ON p.id = d.data_plan_id
+            LEFT JOIN networks n ON n.id = p.network_id
+            LEFT JOIN user_data u ON u.id = d.user_id
+            ORDER BY d.id DESC
+            LIMIT {$debitFetch}
+        ";
+        $q = mysqli_query($this->conn, $sql);
+        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
 
-        $events = [];
-        while ($res && ($ev = $res->fetch_assoc())) {
-            $events[] = $ev;
-        }
+        // Cable debits
+        $sql = "
+            SELECT
+                'debit' AS direction,
+                'Cable' AS type,
+                cto.api_reference AS txn_id,
+                cto.amount AS amount,
+                CASE WHEN cto.status = 1 THEN '1' WHEN cto.status = 0 THEN '2' ELSE '3' END AS status,
+                cto.created_at AS date,
+                COALESCE(u.name, u.username, u.email) AS user_name,
+                CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' - ', RIGHT(COALESCE(cto.smartcard_number,''), 4)) AS activity_text
+            FROM cable_tv_orders cto
+            LEFT JOIN cable_tv_plans tp ON tp.id = cto.cable_tv_plan_id
+            LEFT JOIN cable_tv_providers cp ON cp.id = tp.cable_id
+            LEFT JOIN user_data u ON u.id = cto.user_id
+            ORDER BY cto.id DESC
+            LIMIT {$debitFetch}
+        ";
+        $q = mysqli_query($this->conn, $sql);
+        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
 
+        // Electricity debits
+        $sql = "
+            SELECT
+                'debit' AS direction,
+                'Electricity' AS type,
+                eo.api_reference AS txn_id,
+                eo.amount AS amount,
+                CASE WHEN eo.status = 1 THEN '1' WHEN eo.status = 0 THEN '2' ELSE '3' END AS status,
+                eo.created_at AS date,
+                COALESCE(u.name, u.username, u.email) AS user_name,
+                CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' - ', RIGHT(COALESCE(eo.meter_number,''), 4)) AS activity_text
+            FROM electricity_orders eo
+            LEFT JOIN electricity_providers ep ON ep.id = eo.electricity_provider_id
+            LEFT JOIN user_data u ON u.id = eo.user_id
+            ORDER BY eo.id DESC
+            LIMIT {$debitFetch}
+        ";
+        $q = mysqli_query($this->conn, $sql);
+        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
+
+        // Generic product orders (orders table)
+        $sql = "
+            SELECT
+                'debit' AS direction,
+                'Order' AS type,
+                NULL AS txn_id,
+                o.total_amount AS amount,
+                CASE WHEN o.status = 1 THEN '1' WHEN o.status = 0 THEN '2' ELSE '3' END AS status,
+                o.created_at AS date,
+                COALESCE(u.name, u.username, u.email) AS user_name,
+                MAX(p.name) AS activity_text
+            FROM orders o
+            INNER JOIN order_items oi ON oi.order_id = o.id
+            INNER JOIN products p ON p.id = oi.product_id
+            LEFT JOIN user_data u ON u.id = o.user_id
+            GROUP BY o.id
+            ORDER BY o.id DESC
+            LIMIT {$debitFetch}
+        ";
+        $q = mysqli_query($this->conn, $sql);
+        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
+
+        // Keep only latest debits
+        usort($debits, function($a,$b){
+            $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
+            $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
+            return $tb <=> $ta;
+        });
+        if (count($debits) > $debitLimit) $debits = array_slice($debits, 0, $debitLimit);
+
+        // Credits (deposits)
+        $sql = "
+            SELECT
+                'credit' AS direction,
+                'Deposit' AS type,
+                ut.txn_id AS txn_id,
+                ut.amount AS amount,
+                CASE WHEN ut.status = 1 THEN '1' WHEN ut.status = 0 THEN '2' ELSE '3' END AS status,
+                ut.date AS date,
+                COALESCE(u.name, u.username, u.email) AS user_name,
+                COALESCE(ut.type, 'Deposit') AS activity_text
+            FROM user_transaction ut
+            LEFT JOIN user_data u ON u.id = ut.user_id
+            ORDER BY ut.id DESC
+            LIMIT {$creditFetch}
+        ";
+        $q = mysqli_query($this->conn, $sql);
+        while ($q && ($r = $q->fetch_assoc())) { $credits[] = $r; }
+
+        // Keep only latest credits
+        usort($credits, function($a,$b){
+            $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
+            $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
+            return $tb <=> $ta;
+        });
+        if (count($credits) > $creditLimit) $credits = array_slice($credits, 0, $creditLimit);
+
+        $events = array_merge($debits, $credits);
+
+        usort($events, function($a,$b){
+            $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
+            $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
+            return $tb <=> $ta;
+        });
+
+        if (count($events) > $limit) $events = array_slice($events, 0, $limit);
         return $events;
     }
    public function unread_notifications_count(){
