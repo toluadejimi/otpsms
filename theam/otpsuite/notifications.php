@@ -88,7 +88,8 @@ function loadNotifications(){
 
 
 /* Open modal */
-$(document).on("click",".openNotification",function(){
+$(document).on("click",".openNotification",function(e){
+    e.preventDefault(); // prevent href="#" from causing navigation/jump
     const id = $(this).data("id");
     const n = notificationsMap[id];
 
