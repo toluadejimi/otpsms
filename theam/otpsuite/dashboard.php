@@ -665,7 +665,8 @@ include 'include/header-main.php';
             <!-- * Recent Activities -->
             <?php $recentActivitiesHtml = ob_get_clean(); ?>
 
-            <!-- Transactions -->
+            <!-- Transactions (disabled - show only Recent Activity) -->
+            <?php /* ?>
             <div class="section mt-4 p-0">
                 <div class="ds-card">
                     <div class="ds-section-head">
@@ -743,6 +744,7 @@ include 'include/header-main.php';
                 </div>
             </div>
             <!-- * Transactions -->
+            <?php */ ?>
             <?php if (!empty($recentActivitiesHtml)) { echo $recentActivitiesHtml; } ?>
         </div>
     </div> 
