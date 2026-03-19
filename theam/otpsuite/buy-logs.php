@@ -144,7 +144,8 @@ foreach ($log_categories as $category) {
                             $pInitials = strtoupper(mb_substr(preg_replace('/[^A-Za-z0-9]+/', ' ', $pName), 0, 1));
                             if ($pInitials === '') $pInitials = 'L';
                             $inStock = (int)($product['in_stock'] ?? 0);
-                            $hiddenClass = ($pIndex >= 2) ? ' d-none log-hidden' : '';
+                            // Show at least 10 products per category by default
+                            $hiddenClass = ($pIndex >= 10) ? ' d-none log-hidden' : '';
                           ?>
                           <div class="log-item log-card<?php echo $hiddenClass; ?>"
                                data-name="<?php echo strtolower(htmlspecialchars($pName)); ?>"
