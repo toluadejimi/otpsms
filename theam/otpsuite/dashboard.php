@@ -864,7 +864,8 @@ include 'include/header-main.php';
                 $("#popupTime").text(n.created_at);
                 const modal = new bootstrap.Modal(document.getElementById('NotificationPopup'));
                 modal.show();
-                $("#popupReadMore").off().on("click",function(){ window.location.href = "notifications?open=" + n.id; });
+                // Take user back to home page when clicking "Read More"
+                $("#popupReadMore").off().on("click",function(){ window.location.href = "dashboard"; });
                 $("#popupDismiss").off().on("click",function(){ modal.hide(); });
                 $("#popupDontShow").off().on("click",function(){
                     $.post("api/notifications/dismissNotification.php",{id:n.id,token},function(){ modal.hide(); });
