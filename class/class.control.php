@@ -455,153 +455,140 @@ public function generateRandomString32($length = 32) {
     return $final;
    }  
 
-    // Global feed for dashboard "Recent Activity":
-    // - recent orders (debits) from `orders`
-    // - recent deposits (credits) from `user_transaction`
-    // Returned array is already merged/sorted by time desc.
     public function recent_activities($limit = 10){
         $limit = (int)$limit;
         if ($limit <= 0) $limit = 10;
 
         $subLimit = max(30, $limit * 3);
 
-        // NOTE: Dashboard expects status mapping like:
-        // - "1" => Success
-        // - "2" => Pending
-        // - other => Cancelled
-        // Most service order tables use status: 0=pending, 1=success, 2=failed
-        // So we normalize them in SQL to: 1=>1, 0=>2, 2=>3
+        // Wrap each UNION component in parentheses because some MySQL/MariaDB versions
+        // are strict about ORDER BY ... LIMIT inside UNION.
         $sql = "
             SELECT x.* FROM (
-                -- Airtime
-                SELECT
-                    NULL AS order_id,
-                    a.api_reference AS txn_id,
-                    'debit' AS direction,
-                    'Airtime' AS type,
-                    a.amount AS amount,
-                    CASE WHEN a.status = 1 THEN '1' WHEN a.status = 0 THEN '2' ELSE '3' END AS status,
-                    a.created_at AS date,
-                    COALESCE(u.name, u.username, u.email) AS user_name,
-                    COALESCE(n.name,'Network') AS network_name,
-                    CONCAT('Airtime ', COALESCE(n.name,'Network'), ' ****', RIGHT(COALESCE(a.phone,''), 4)) AS activity_text
-                FROM airtime_orders a
-                INNER JOIN networks n ON n.id = a.network_id
-                INNER JOIN user_data u ON u.id = a.user_id
-                ORDER BY a.id DESC
-                LIMIT {$subLimit}
-
+                (
+                    SELECT
+                        NULL AS order_id,
+                        a.api_reference AS txn_id,
+                        'debit' AS direction,
+                        'Airtime' AS type,
+                        a.amount AS amount,
+                        CASE WHEN a.status = 1 THEN '1' WHEN a.status = 0 THEN '2' ELSE '3' END AS status,
+                        a.created_at AS date,
+                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        COALESCE(n.name,'Network') AS network_name,
+                        CONCAT('Airtime ', COALESCE(n.name,'Network'), ' - ', RIGHT(COALESCE(a.phone,''), 4)) AS activity_text
+                    FROM airtime_orders a
+                    INNER JOIN networks n ON n.id = a.network_id
+                    INNER JOIN user_data u ON u.id = a.user_id
+                    ORDER BY a.id DESC
+                    LIMIT {$subLimit}
+                )
                 UNION ALL
-
-                -- Data
-                SELECT
-                    NULL AS order_id,
-                    d.api_reference AS txn_id,
-                    'debit' AS direction,
-                    'Data' AS type,
-                    d.amount AS amount,
-                    CASE WHEN d.status = 1 THEN '1' WHEN d.status = 0 THEN '2' ELSE '3' END AS status,
-                    d.created_at AS date,
-                    COALESCE(u.name, u.username, u.email) AS user_name,
-                    CONCAT(COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,'')) AS network_name,
-                    CONCAT('Data ', COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''), ' ****', RIGHT(COALESCE(d.phone,''), 4)) AS activity_text
-                FROM data_orders d
-                INNER JOIN data_plans p ON p.id = d.data_plan_id
-                INNER JOIN networks n ON n.id = p.network_id
-                INNER JOIN user_data u ON u.id = d.user_id
-                ORDER BY d.id DESC
-                LIMIT {$subLimit}
-
+                (
+                    SELECT
+                        NULL AS order_id,
+                        d.api_reference AS txn_id,
+                        'debit' AS direction,
+                        'Data' AS type,
+                        d.amount AS amount,
+                        CASE WHEN d.status = 1 THEN '1' WHEN d.status = 0 THEN '2' ELSE '3' END AS status,
+                        d.created_at AS date,
+                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        CONCAT(COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,'')) AS network_name,
+                        CONCAT('Data ', COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''), ' - ', RIGHT(COALESCE(d.phone,''), 4)) AS activity_text
+                    FROM data_orders d
+                    INNER JOIN data_plans p ON p.id = d.data_plan_id
+                    INNER JOIN networks n ON n.id = p.network_id
+                    INNER JOIN user_data u ON u.id = d.user_id
+                    ORDER BY d.id DESC
+                    LIMIT {$subLimit}
+                )
                 UNION ALL
-
-                -- Cable TV
-                SELECT
-                    NULL AS order_id,
-                    cto.api_reference AS txn_id,
-                    'debit' AS direction,
-                    'Cable' AS type,
-                    cto.amount AS amount,
-                    CASE WHEN cto.status = 1 THEN '1' WHEN cto.status = 0 THEN '2' ELSE '3' END AS status,
-                    cto.created_at AS date,
-                    COALESCE(u.name, u.username, u.email) AS user_name,
-                    COALESCE(cp.name,'Provider') AS network_name,
-                    CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' ', COALESCE(tp.plan_name,''), ' ****', RIGHT(COALESCE(cto.smartcard_number,''), 4)) AS activity_text
-                FROM cable_tv_orders cto
-                INNER JOIN cable_tv_plans tp ON tp.id = cto.cable_tv_plan_id
-                INNER JOIN cable_tv_providers cp ON cp.id = tp.cable_id
-                INNER JOIN user_data u ON u.id = cto.user_id
-                ORDER BY cto.id DESC
-                LIMIT {$subLimit}
-
+                (
+                    SELECT
+                        NULL AS order_id,
+                        cto.api_reference AS txn_id,
+                        'debit' AS direction,
+                        'Cable' AS type,
+                        cto.amount AS amount,
+                        CASE WHEN cto.status = 1 THEN '1' WHEN cto.status = 0 THEN '2' ELSE '3' END AS status,
+                        cto.created_at AS date,
+                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        COALESCE(cp.name,'Provider') AS network_name,
+                        CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' - ', RIGHT(COALESCE(cto.smartcard_number,''), 4)) AS activity_text
+                    FROM cable_tv_orders cto
+                    INNER JOIN cable_tv_plans tp ON tp.id = cto.cable_tv_plan_id
+                    INNER JOIN cable_tv_providers cp ON cp.id = tp.cable_id
+                    INNER JOIN user_data u ON u.id = cto.user_id
+                    ORDER BY cto.id DESC
+                    LIMIT {$subLimit}
+                )
                 UNION ALL
-
-                -- Electricity
-                SELECT
-                    NULL AS order_id,
-                    eo.api_reference AS txn_id,
-                    'debit' AS direction,
-                    'Electricity' AS type,
-                    eo.amount AS amount,
-                    CASE WHEN eo.status = 1 THEN '1' WHEN eo.status = 0 THEN '2' ELSE '3' END AS status,
-                    eo.created_at AS date,
-                    COALESCE(u.name, u.username, u.email) AS user_name,
-                    COALESCE(ep.name,'Provider') AS network_name,
-                    CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' ****', RIGHT(COALESCE(eo.meter_number,''), 4)) AS activity_text
-                FROM electricity_orders eo
-                INNER JOIN electricity_providers ep ON ep.id = eo.electricity_provider_id
-                INNER JOIN user_data u ON u.id = eo.user_id
-                ORDER BY eo.id DESC
-                LIMIT {$subLimit}
-
+                (
+                    SELECT
+                        NULL AS order_id,
+                        eo.api_reference AS txn_id,
+                        'debit' AS direction,
+                        'Electricity' AS type,
+                        eo.amount AS amount,
+                        CASE WHEN eo.status = 1 THEN '1' WHEN eo.status = 0 THEN '2' ELSE '3' END AS status,
+                        eo.created_at AS date,
+                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        COALESCE(ep.name,'Provider') AS network_name,
+                        CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' - ', RIGHT(COALESCE(eo.meter_number,''), 4)) AS activity_text
+                    FROM electricity_orders eo
+                    INNER JOIN electricity_providers ep ON ep.id = eo.electricity_provider_id
+                    INNER JOIN user_data u ON u.id = eo.user_id
+                    ORDER BY eo.id DESC
+                    LIMIT {$subLimit}
+                )
                 UNION ALL
-
-                -- Generic product orders (if still used)
-                SELECT
-                    o.id AS order_id,
-                    NULL AS txn_id,
-                    'debit' AS direction,
-                    'Order' AS type,
-                    o.total_amount AS amount,
-                    CASE WHEN o.status = 1 THEN '1' WHEN o.status = 0 THEN '2' ELSE '3' END AS status,
-                    o.created_at AS date,
-                    COALESCE(u.name, u.username, u.email) AS user_name,
-                    COUNT(oi.id) AS network_name,
-                    CASE
-                        WHEN COUNT(oi.id) > 1 THEN CONCAT(MAX(p.name), ' x', COUNT(oi.id))
-                        ELSE MAX(p.name)
-                    END AS activity_text
-                FROM orders o
-                INNER JOIN order_items oi ON oi.order_id = o.id
-                INNER JOIN products p ON p.id = oi.product_id
-                INNER JOIN user_data u ON u.id = o.user_id
-                GROUP BY o.id
-                ORDER BY o.id DESC
-                LIMIT {$subLimit}
-
+                (
+                    SELECT
+                        o.id AS order_id,
+                        NULL AS txn_id,
+                        'debit' AS direction,
+                        'Order' AS type,
+                        o.total_amount AS amount,
+                        CASE WHEN o.status = 1 THEN '1' WHEN o.status = 0 THEN '2' ELSE '3' END AS status,
+                        o.created_at AS date,
+                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        NULL AS network_name,
+                        MAX(p.name) AS activity_text
+                    FROM orders o
+                    INNER JOIN order_items oi ON oi.order_id = o.id
+                    INNER JOIN products p ON p.id = oi.product_id
+                    INNER JOIN user_data u ON u.id = o.user_id
+                    GROUP BY o.id
+                    ORDER BY o.id DESC
+                    LIMIT {$subLimit}
+                )
                 UNION ALL
-
-                -- Deposits
-                SELECT
-                    NULL AS order_id,
-                    ut.txn_id AS txn_id,
-                    'credit' AS direction,
-                    'Deposit' AS type,
-                    ut.amount AS amount,
-                    CASE WHEN ut.status = 1 THEN '1' WHEN ut.status = 0 THEN '2' ELSE '3' END AS status,
-                    ut.date AS date,
-                    COALESCE(u.name, u.username, u.email) AS user_name,
-                    NULL AS network_name,
-                    COALESCE(ut.type, 'Deposit') AS activity_text
-                FROM user_transaction ut
-                INNER JOIN user_data u ON u.id = ut.user_id
-                ORDER BY ut.id DESC
-                LIMIT {$subLimit}
+                (
+                    SELECT
+                        NULL AS order_id,
+                        ut.txn_id AS txn_id,
+                        'credit' AS direction,
+                        'Deposit' AS type,
+                        ut.amount AS amount,
+                        CASE WHEN ut.status = 1 THEN '1' WHEN ut.status = 0 THEN '2' ELSE '3' END AS status,
+                        ut.date AS date,
+                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        NULL AS network_name,
+                        COALESCE(ut.type, 'Deposit') AS activity_text
+                    FROM user_transaction ut
+                    INNER JOIN user_data u ON u.id = ut.user_id
+                    ORDER BY ut.id DESC
+                    LIMIT {$subLimit}
+                )
             ) x
             ORDER BY x.date DESC
             LIMIT {$limit}
         ";
 
         $res = mysqli_query($this->conn, $sql);
+        if (!$res) return [];
+
         $events = [];
         while ($res && ($ev = $res->fetch_assoc())) {
             $events[] = $ev;
