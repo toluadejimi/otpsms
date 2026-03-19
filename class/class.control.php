@@ -468,15 +468,15 @@ public function generateRandomString32($length = 32) {
                 (
                     SELECT
                         NULL AS order_id,
-                        a.api_reference AS txn_id,
-                        'debit' AS direction,
-                        'Airtime' AS type,
+                        CAST(a.api_reference AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
+                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
+                        CAST('Airtime' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
                         a.amount AS amount,
                         CASE WHEN a.status = 1 THEN '1' WHEN a.status = 0 THEN '2' ELSE '3' END AS status,
                         a.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) AS user_name,
-                        COALESCE(n.name,'Network') AS network_name,
-                        CONCAT('Airtime ', COALESCE(n.name,'Network'), ' - ', RIGHT(COALESCE(a.phone,''), 4)) AS activity_text
+                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
+                        COALESCE(n.name,'Network') COLLATE utf8mb4_unicode_ci AS network_name,
+                        (CONCAT('Airtime ', COALESCE(n.name,'Network'), ' - ', RIGHT(COALESCE(a.phone,''), 4))) COLLATE utf8mb4_unicode_ci AS activity_text
                     FROM airtime_orders a
                     INNER JOIN networks n ON n.id = a.network_id
                     INNER JOIN user_data u ON u.id = a.user_id
@@ -487,15 +487,15 @@ public function generateRandomString32($length = 32) {
                 (
                     SELECT
                         NULL AS order_id,
-                        d.api_reference AS txn_id,
-                        'debit' AS direction,
-                        'Data' AS type,
+                        CAST(d.api_reference AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
+                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
+                        CAST('Data' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
                         d.amount AS amount,
                         CASE WHEN d.status = 1 THEN '1' WHEN d.status = 0 THEN '2' ELSE '3' END AS status,
                         d.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) AS user_name,
-                        CONCAT(COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,'')) AS network_name,
-                        CONCAT('Data ', COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''), ' - ', RIGHT(COALESCE(d.phone,''), 4)) AS activity_text
+                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
+                        (CONCAT(COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''))) COLLATE utf8mb4_unicode_ci AS network_name,
+                        (CONCAT('Data ', COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''), ' - ', RIGHT(COALESCE(d.phone,''), 4))) COLLATE utf8mb4_unicode_ci AS activity_text
                     FROM data_orders d
                     INNER JOIN data_plans p ON p.id = d.data_plan_id
                     INNER JOIN networks n ON n.id = p.network_id
@@ -507,15 +507,15 @@ public function generateRandomString32($length = 32) {
                 (
                     SELECT
                         NULL AS order_id,
-                        cto.api_reference AS txn_id,
-                        'debit' AS direction,
-                        'Cable' AS type,
+                        CAST(cto.api_reference AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
+                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
+                        CAST('Cable' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
                         cto.amount AS amount,
                         CASE WHEN cto.status = 1 THEN '1' WHEN cto.status = 0 THEN '2' ELSE '3' END AS status,
                         cto.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) AS user_name,
-                        COALESCE(cp.name,'Provider') AS network_name,
-                        CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' - ', RIGHT(COALESCE(cto.smartcard_number,''), 4)) AS activity_text
+                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
+                        COALESCE(cp.name,'Provider') COLLATE utf8mb4_unicode_ci AS network_name,
+                        (CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' - ', RIGHT(COALESCE(cto.smartcard_number,''), 4))) COLLATE utf8mb4_unicode_ci AS activity_text
                     FROM cable_tv_orders cto
                     INNER JOIN cable_tv_plans tp ON tp.id = cto.cable_tv_plan_id
                     INNER JOIN cable_tv_providers cp ON cp.id = tp.cable_id
@@ -527,15 +527,15 @@ public function generateRandomString32($length = 32) {
                 (
                     SELECT
                         NULL AS order_id,
-                        eo.api_reference AS txn_id,
-                        'debit' AS direction,
-                        'Electricity' AS type,
+                        CAST(eo.api_reference AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
+                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
+                        CAST('Electricity' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
                         eo.amount AS amount,
                         CASE WHEN eo.status = 1 THEN '1' WHEN eo.status = 0 THEN '2' ELSE '3' END AS status,
                         eo.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) AS user_name,
-                        COALESCE(ep.name,'Provider') AS network_name,
-                        CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' - ', RIGHT(COALESCE(eo.meter_number,''), 4)) AS activity_text
+                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
+                        COALESCE(ep.name,'Provider') COLLATE utf8mb4_unicode_ci AS network_name,
+                        (CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' - ', RIGHT(COALESCE(eo.meter_number,''), 4))) COLLATE utf8mb4_unicode_ci AS activity_text
                     FROM electricity_orders eo
                     INNER JOIN electricity_providers ep ON ep.id = eo.electricity_provider_id
                     INNER JOIN user_data u ON u.id = eo.user_id
@@ -547,14 +547,14 @@ public function generateRandomString32($length = 32) {
                     SELECT
                         o.id AS order_id,
                         NULL AS txn_id,
-                        'debit' AS direction,
-                        'Order' AS type,
+                        CAST('debit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
+                        CAST('Order' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
                         o.total_amount AS amount,
                         CASE WHEN o.status = 1 THEN '1' WHEN o.status = 0 THEN '2' ELSE '3' END AS status,
                         o.created_at AS date,
-                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
                         NULL AS network_name,
-                        MAX(p.name) AS activity_text
+                        (MAX(p.name)) COLLATE utf8mb4_unicode_ci AS activity_text
                     FROM orders o
                     INNER JOIN order_items oi ON oi.order_id = o.id
                     INNER JOIN products p ON p.id = oi.product_id
@@ -567,15 +567,15 @@ public function generateRandomString32($length = 32) {
                 (
                     SELECT
                         NULL AS order_id,
-                        ut.txn_id AS txn_id,
-                        'credit' AS direction,
-                        'Deposit' AS type,
+                        CAST(ut.txn_id AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS txn_id,
+                        CAST('credit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS direction,
+                        CAST('Deposit' AS CHAR CHARACTER SET utf8mb4) COLLATE utf8mb4_unicode_ci AS type,
                         ut.amount AS amount,
                         CASE WHEN ut.status = 1 THEN '1' WHEN ut.status = 0 THEN '2' ELSE '3' END AS status,
                         ut.date AS date,
-                        COALESCE(u.name, u.username, u.email) AS user_name,
+                        COALESCE(u.name, u.username, u.email) COLLATE utf8mb4_unicode_ci AS user_name,
                         NULL AS network_name,
-                        COALESCE(ut.type, 'Deposit') AS activity_text
+                        (COALESCE(ut.type, 'Deposit')) COLLATE utf8mb4_unicode_ci AS activity_text
                     FROM user_transaction ut
                     INNER JOIN user_data u ON u.id = ut.user_id
                     ORDER BY ut.id DESC
