@@ -695,8 +695,15 @@ include 'include/header-main.php';
                                         $badgeClass = 'deposit';
                                         $iconClass = 'deposit';
                                         $icon = 'ri-arrow-down-circle-line';
-                                        $provider = trim((string)($ev['activity_text'] ?? 'Wallet'));
-                                        $desc = 'Wallet top-up via ' . $provider . ' · ' . $statusText;
+                                        // New feed: summary is a full line. Legacy feed: activity_text was gateway name only.
+                                        $coreDep = trim((string)($ev['activity_text'] ?? ''));
+                                        if ($coreDep === '') {
+                                            $desc = 'Wallet top-up · ' . $statusText;
+                                        } elseif (strpos($coreDep, 'Wallet top-up') !== false || strpos($coreDep, '·') !== false) {
+                                            $desc = $coreDep;
+                                        } else {
+                                            $desc = 'Wallet top-up via ' . $coreDep . ' · ' . $statusText;
+                                        }
                                     }
                                 ?>
                                     <div class="ra-item">
