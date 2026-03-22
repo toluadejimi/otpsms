@@ -622,25 +622,9 @@ public function generateRandomString32($length = 32) {
             return (int)($b['_sort_id'] ?? 0) <=> (int)($a['_sort_id'] ?? 0);
         });
 
-        // Reserve ~half the feed for purchase activity when enough orders exist (so deposits don't dominate).
-        $wantDebits = min(count($debits), max(3, (int)ceil($limit * 0.5)));
-        $wantCredits = $limit - $wantDebits;
-        if ($wantCredits < 0) {
-            $wantCredits = 0;
-        }
-        if (count($credits) < $wantCredits) {
-            $wantCredits = count($credits);
-            $wantDebits = min(count($debits), $limit - $wantCredits);
-        }
-        if (count($debits) < $wantDebits) {
-            $wantDebits = count($debits);
-            $wantCredits = min(count($credits), $limit - $wantDebits);
-        }
-
-        $pickDebits = array_slice($debits, 0, $wantDebits);
-        $pickCredits = array_slice($credits, 0, $wantCredits);
-
-        $events = array_merge($pickDebits, $pickCredits);
+        // Single chronological feed: merge debits + credits, then keep the N most recent by date/time.
+        // (Do NOT reserve fixed counts per type — that stacks "all new deposits" then "older orders".)
+        $events = array_merge($debits, $credits);
 
         usort($events, function ($a, $b) {
             $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
@@ -650,6 +634,10 @@ public function generateRandomString32($length = 32) {
             }
             return (int)($b['_sort_id'] ?? 0) <=> (int)($a['_sort_id'] ?? 0);
         });
+
+        if (count($events) > $limit) {
+            $events = array_slice($events, 0, $limit);
+        }
 
         foreach ($events as &$ev) {
             unset($ev['_sort_id']);
