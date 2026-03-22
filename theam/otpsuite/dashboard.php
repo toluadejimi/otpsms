@@ -555,22 +555,30 @@ include 'include/header-main.php';
                                 return substr($name, 0, 2) . '***' . substr($name, -1);
                             };
 
-                            $timeAgo = function($dateStr){
+                            $timeAgo = function ($dateStr, $eventTs = null) {
                                 $dateStr = (string)$dateStr;
-                                if (trim($dateStr) === '') return '';
-
                                 $ts = false;
 
-                                // If provider sends unix timestamp (seconds or ms)
-                                if (is_numeric($dateStr)) {
-                                    $n = (float)$dateStr;
-                                    if ($n > 1000000000000) { // ms
-                                        $n = $n / 1000;
+                                // Prefer MySQL UNIX_TIMESTAMP (same instant used for sorting — avoids PHP/MySQL TZ mismatch)
+                                if ($eventTs !== null && $eventTs !== '') {
+                                    $eti = (int)$eventTs;
+                                    if ($eti > 0) {
+                                        $ts = $eti;
                                     }
-                                    $ts = (int)$n;
-                                } else {
-                                    // If ISO datetime with Z, parse as UTC then convert (avoid timezone drift)
-                                    if (str_ends_with($dateStr, 'Z')) {
+                                }
+
+                                if ($ts === false || $ts <= 0) {
+                                    if (trim($dateStr) === '') {
+                                        return '';
+                                    }
+                                    // Plain numeric unix (seconds or ms)
+                                    if (is_numeric($dateStr)) {
+                                        $n = (float)$dateStr;
+                                        if ($n > 1000000000000) {
+                                            $n = $n / 1000;
+                                        }
+                                        $ts = (int)$n;
+                                    } elseif (str_ends_with($dateStr, 'Z')) {
                                         try {
                                             $dt = new DateTime($dateStr, new DateTimeZone('UTC'));
                                             $dt->setTimezone(new DateTimeZone('Africa/Lagos'));
@@ -579,21 +587,48 @@ include 'include/header-main.php';
                                             $ts = strtotime($dateStr);
                                         }
                                     } else {
-                                        $ts = strtotime($dateStr);
+                                        // MySQL DATETIME: parse explicitly in app timezone (matches config.php)
+                                        $trim = trim($dateStr);
+                                        $tz = new DateTimeZone(function_exists('date_default_timezone_get') ? date_default_timezone_get() : 'UTC');
+                                        $parsed = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $trim, $tz);
+                                        if ($parsed instanceof DateTimeImmutable) {
+                                            $ts = $parsed->getTimestamp();
+                                        } else {
+                                            $parsed = DateTimeImmutable::createFromFormat('Y-m-d H:i:s.u', $trim, $tz);
+                                            if ($parsed instanceof DateTimeImmutable) {
+                                                $ts = $parsed->getTimestamp();
+                                            } else {
+                                                $ts = strtotime($dateStr);
+                                            }
+                                        }
                                     }
                                 }
 
-                                if (!$ts) return '';
+                                if ($ts === false || (int)$ts <= 0) {
+                                    return '';
+                                }
 
-                                $diff = time() - $ts;
-                                if ($diff < 0) $diff = 0;
+                                $diff = time() - (int)$ts;
+                                if ($diff < 0) {
+                                    $diff = 0;
+                                }
 
-                                if ($diff < 60) return 'Just now';
-                                $m = floor($diff / 60);
-                                if ($m < 60) return $m . 'm ago';
-                                $h = floor($m / 60);
-                                if ($h < 24) return $h . 'h ago';
-                                $d = floor($h / 24);
+                                if ($diff < 60) {
+                                    return 'Just now';
+                                }
+                                $m = (int)floor($diff / 60);
+                                if ($m < 60) {
+                                    return $m . 'm ago';
+                                }
+                                $h = (int)floor($m / 60);
+                                if ($h < 24) {
+                                    $remM = $m % 60;
+                                    if ($h > 0 && $remM > 0) {
+                                        return $h . 'h ' . $remM . 'm ago';
+                                    }
+                                    return $h . 'h ago';
+                                }
+                                $d = (int)floor($h / 24);
                                 return $d . 'd ago';
                             };
                         ?>
@@ -624,7 +659,7 @@ include 'include/header-main.php';
                                     if ($status === '1') $statusText = 'Success';
                                     elseif ($status === '2') $statusText = 'Pending';
 
-                                    $timeText = $timeAgo($ev['date'] ?? '');
+                                    $timeText = $timeAgo($ev['date'] ?? '', $ev['event_ts'] ?? null);
                                     $typeLabel = trim((string)($ev['type'] ?? ($isDebit ? 'Order' : 'Deposit')));
 
                                     if ($isDebit) {

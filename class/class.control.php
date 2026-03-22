@@ -682,7 +682,8 @@ public function generateRandomString32($length = 32) {
         }
 
         foreach ($out as &$ev) {
-            unset($ev['_sort_id'], $ev['event_ts']);
+            // Keep event_ts for UI "time ago" (matches DB / sort); drop internal sort key only.
+            unset($ev['_sort_id']);
         }
         unset($ev);
 
