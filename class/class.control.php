@@ -459,17 +459,22 @@ public function generateRandomString32($length = 32) {
         $limit = (int)$limit;
         if ($limit <= 0) $limit = 10;
 
-        // Make sure we always show some "orders" (debits) even if deposits are newer.
-        $debitLimit = (int)ceil($limit * 0.4);
-        if ($debitLimit < 2) $debitLimit = 2;
-        $creditLimit = $limit - $debitLimit;
-        if ($creditLimit < 0) $creditLimit = 0;
-
-        $debitFetch = max(30, $debitLimit * 3);
-        $creditFetch = max(30, $creditLimit * 3);
+        // Pull enough rows per source so merged "newest debits" are truly recent across VTU + logs.
+        $fetchCap = max(60, $limit * 5);
 
         $debits = [];
         $credits = [];
+
+        $sortDebits = function (&$rows) {
+            usort($rows, function ($a, $b) {
+                $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
+                $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
+                if ($tb !== $ta) {
+                    return $tb <=> $ta;
+                }
+                return (int)($b['_sort_id'] ?? 0) <=> (int)($a['_sort_id'] ?? 0);
+            });
+        };
 
         // Airtime debits
         $sql = "
@@ -481,17 +486,18 @@ public function generateRandomString32($length = 32) {
                 CASE WHEN a.status = 1 THEN '1' WHEN a.status = 0 THEN '2' ELSE '3' END AS status,
                 a.created_at AS date,
                 COALESCE(u.name, u.username, u.email) AS user_name,
-                CONCAT('Airtime ', COALESCE(n.name,'Network'), ' - ', RIGHT(COALESCE(a.phone,''), 4)) AS activity_text
+                CONCAT('Airtime ', COALESCE(n.name,'Network'), ' · ****', RIGHT(COALESCE(a.phone,''), 4)) AS activity_text,
+                a.id AS _sort_id
             FROM airtime_orders a
             LEFT JOIN networks n ON n.id = a.network_id
             LEFT JOIN user_data u ON u.id = a.user_id
             ORDER BY a.id DESC
-            LIMIT {$debitFetch}
+            LIMIT {$fetchCap}
         ";
         $q = mysqli_query($this->conn, $sql);
         while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
 
-        // Data debits
+        // Data debits (network from plan, fallback to order.network_id)
         $sql = "
             SELECT
                 'debit' AS direction,
@@ -501,13 +507,19 @@ public function generateRandomString32($length = 32) {
                 CASE WHEN d.status = 1 THEN '1' WHEN d.status = 0 THEN '2' ELSE '3' END AS status,
                 d.created_at AS date,
                 COALESCE(u.name, u.username, u.email) AS user_name,
-                CONCAT('Data ', COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''), ' - ', RIGHT(COALESCE(d.phone,''), 4)) AS activity_text
+                CONCAT(
+                    'Data ',
+                    TRIM(CONCAT(COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''))),
+                    ' · ****',
+                    RIGHT(COALESCE(d.phone,''), 4)
+                ) AS activity_text,
+                d.id AS _sort_id
             FROM data_orders d
             LEFT JOIN data_plans p ON p.id = d.data_plan_id
-            LEFT JOIN networks n ON n.id = p.network_id
+            LEFT JOIN networks n ON n.id = COALESCE(p.network_id, d.network_id)
             LEFT JOIN user_data u ON u.id = d.user_id
             ORDER BY d.id DESC
-            LIMIT {$debitFetch}
+            LIMIT {$fetchCap}
         ";
         $q = mysqli_query($this->conn, $sql);
         while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
@@ -522,13 +534,14 @@ public function generateRandomString32($length = 32) {
                 CASE WHEN cto.status = 1 THEN '1' WHEN cto.status = 0 THEN '2' ELSE '3' END AS status,
                 cto.created_at AS date,
                 COALESCE(u.name, u.username, u.email) AS user_name,
-                CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' - ', RIGHT(COALESCE(cto.smartcard_number,''), 4)) AS activity_text
+                CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' · ****', RIGHT(COALESCE(cto.smartcard_number,''), 4)) AS activity_text,
+                cto.id AS _sort_id
             FROM cable_tv_orders cto
             LEFT JOIN cable_tv_plans tp ON tp.id = cto.cable_tv_plan_id
             LEFT JOIN cable_tv_providers cp ON cp.id = tp.cable_id
             LEFT JOIN user_data u ON u.id = cto.user_id
             ORDER BY cto.id DESC
-            LIMIT {$debitFetch}
+            LIMIT {$fetchCap}
         ";
         $q = mysqli_query($this->conn, $sql);
         while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
@@ -543,12 +556,13 @@ public function generateRandomString32($length = 32) {
                 CASE WHEN eo.status = 1 THEN '1' WHEN eo.status = 0 THEN '2' ELSE '3' END AS status,
                 eo.created_at AS date,
                 COALESCE(u.name, u.username, u.email) AS user_name,
-                CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' - ', RIGHT(COALESCE(eo.meter_number,''), 4)) AS activity_text
+                CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' · ****', RIGHT(COALESCE(eo.meter_number,''), 4)) AS activity_text,
+                eo.id AS _sort_id
             FROM electricity_orders eo
             LEFT JOIN electricity_providers ep ON ep.id = eo.electricity_provider_id
             LEFT JOIN user_data u ON u.id = eo.user_id
             ORDER BY eo.id DESC
-            LIMIT {$debitFetch}
+            LIMIT {$fetchCap}
         ";
         $q = mysqli_query($this->conn, $sql);
         while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
@@ -557,33 +571,28 @@ public function generateRandomString32($length = 32) {
         $sql = "
             SELECT
                 'debit' AS direction,
-                'Order' AS type,
-                NULL AS txn_id,
+                'Logs' AS type,
+                CONCAT('order-', o.id) AS txn_id,
                 o.total_amount AS amount,
                 CASE WHEN o.status = 1 THEN '1' WHEN o.status = 0 THEN '2' ELSE '3' END AS status,
                 o.created_at AS date,
-                COALESCE(u.name, u.username, u.email) AS user_name,
-                MAX(p.name) AS activity_text
+                COALESCE(MAX(u.name), MAX(u.username), MAX(u.email)) AS user_name,
+                MAX(p.name) AS activity_text,
+                o.id AS _sort_id
             FROM orders o
             INNER JOIN order_items oi ON oi.order_id = o.id
             INNER JOIN products p ON p.id = oi.product_id
             LEFT JOIN user_data u ON u.id = o.user_id
             GROUP BY o.id
             ORDER BY o.id DESC
-            LIMIT {$debitFetch}
+            LIMIT {$fetchCap}
         ";
         $q = mysqli_query($this->conn, $sql);
         while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
 
-        // Keep only latest debits
-        usort($debits, function($a,$b){
-            $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
-            $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
-            return $tb <=> $ta;
-        });
-        if (count($debits) > $debitLimit) $debits = array_slice($debits, 0, $debitLimit);
+        $sortDebits($debits);
 
-        // Credits (deposits)
+        // Credits: wallet funding only (positive amounts). Avoid treating any future debit rows as "deposits".
         $sql = "
             SELECT
                 'credit' AS direction,
@@ -593,32 +602,60 @@ public function generateRandomString32($length = 32) {
                 CASE WHEN ut.status = 1 THEN '1' WHEN ut.status = 0 THEN '2' ELSE '3' END AS status,
                 ut.date AS date,
                 COALESCE(u.name, u.username, u.email) AS user_name,
-                COALESCE(ut.type, 'Deposit') AS activity_text
+                COALESCE(ut.type, 'Wallet') AS activity_text,
+                ut.id AS _sort_id
             FROM user_transaction ut
             LEFT JOIN user_data u ON u.id = ut.user_id
+            WHERE (ut.amount + 0) > 0
             ORDER BY ut.id DESC
-            LIMIT {$creditFetch}
+            LIMIT {$fetchCap}
         ";
         $q = mysqli_query($this->conn, $sql);
         while ($q && ($r = $q->fetch_assoc())) { $credits[] = $r; }
 
-        // Keep only latest credits
-        usort($credits, function($a,$b){
+        usort($credits, function ($a, $b) {
             $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
             $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
-            return $tb <=> $ta;
+            if ($tb !== $ta) {
+                return $tb <=> $ta;
+            }
+            return (int)($b['_sort_id'] ?? 0) <=> (int)($a['_sort_id'] ?? 0);
         });
-        if (count($credits) > $creditLimit) $credits = array_slice($credits, 0, $creditLimit);
 
-        $events = array_merge($debits, $credits);
+        // Reserve ~half the feed for purchase activity when enough orders exist (so deposits don't dominate).
+        $wantDebits = min(count($debits), max(3, (int)ceil($limit * 0.5)));
+        $wantCredits = $limit - $wantDebits;
+        if ($wantCredits < 0) {
+            $wantCredits = 0;
+        }
+        if (count($credits) < $wantCredits) {
+            $wantCredits = count($credits);
+            $wantDebits = min(count($debits), $limit - $wantCredits);
+        }
+        if (count($debits) < $wantDebits) {
+            $wantDebits = count($debits);
+            $wantCredits = min(count($credits), $limit - $wantDebits);
+        }
 
-        usort($events, function($a,$b){
+        $pickDebits = array_slice($debits, 0, $wantDebits);
+        $pickCredits = array_slice($credits, 0, $wantCredits);
+
+        $events = array_merge($pickDebits, $pickCredits);
+
+        usort($events, function ($a, $b) {
             $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
             $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
-            return $tb <=> $ta;
+            if ($tb !== $ta) {
+                return $tb <=> $ta;
+            }
+            return (int)($b['_sort_id'] ?? 0) <=> (int)($a['_sort_id'] ?? 0);
         });
 
-        if (count($events) > $limit) $events = array_slice($events, 0, $limit);
+        foreach ($events as &$ev) {
+            unset($ev['_sort_id']);
+        }
+        unset($ev);
+
         return $events;
     }
    public function unread_notifications_count(){

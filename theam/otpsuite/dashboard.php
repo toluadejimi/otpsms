@@ -209,10 +209,12 @@ include 'include/header-main.php';
         margin-top: 4px;
         font-size: 11px;
         color: var(--ds-muted);
-        white-space: nowrap;
+        line-height: 1.35;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
         overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 220px;
+        max-width: 100%;
     }
     .ra-right{
         display:flex;
@@ -248,6 +250,16 @@ include 'include/header-main.php';
         color: var(--ds-muted);
         white-space: nowrap;
     }
+    .ra-amt{
+        font-size: 12px;
+        font-weight: 900;
+        color: var(--ds-text);
+        white-space: nowrap;
+    }
+    .ra-amt.debit{ color: #F87171; }
+    .ra-amt.credit{ color: #34D399; }
+    body.dark-mode .ra-amt.debit{ color: #fca5a5; }
+    body.dark-mode .ra-amt.credit{ color: #6ee7b7; }
 
     /* Dark mode overrides (theme uses body.dark-mode) */
     body.dark-mode{
@@ -613,22 +625,43 @@ include 'include/header-main.php';
                                     elseif ($status === '2') $statusText = 'Pending';
 
                                     $timeText = $timeAgo($ev['date'] ?? '');
+                                    $typeLabel = trim((string)($ev['type'] ?? ($isDebit ? 'Order' : 'Deposit')));
 
                                     if ($isDebit) {
-                                        $badgeText = 'Order';
+                                        $badgeText = $typeLabel !== '' ? $typeLabel : 'Order';
                                         $badgeClass = 'order';
                                         $iconClass = 'order';
-                                        $icon = 'ri-shopping-cart-line';
-                                        $desc = 'Purchased ' . trim((string)($ev['activity_text'] ?? ''));
-                                        $sub = '';
+                                        $core = trim((string)($ev['activity_text'] ?? ''));
+                                        if ($core === '') {
+                                            $core = 'Purchase';
+                                        }
+                                        switch ($typeLabel) {
+                                            case 'Airtime':
+                                                $icon = 'ri-smartphone-line';
+                                                break;
+                                            case 'Data':
+                                                $icon = 'ri-wifi-line';
+                                                break;
+                                            case 'Cable':
+                                                $icon = 'ri-tv-2-line';
+                                                break;
+                                            case 'Electricity':
+                                                $icon = 'ri-flashlight-line';
+                                                break;
+                                            case 'Logs':
+                                                $icon = 'ri-shopping-bag-3-line';
+                                                break;
+                                            default:
+                                                $icon = 'ri-shopping-cart-line';
+                                        }
+                                        $desc = $core;
                                     } else {
                                         $badgeText = 'Deposit';
                                         $badgeClass = 'deposit';
                                         $iconClass = 'deposit';
                                         $icon = 'ri-arrow-down-circle-line';
-                                        $provider = trim((string)($ev['activity_text'] ?? 'Deposit'));
-                                        $desc = 'Funded ₦' . number_format($amount, 0) . ' via ' . $provider;
-                                        $sub = $statusText;
+                                        $provider = trim((string)($ev['activity_text'] ?? 'Wallet'));
+                                        $desc = 'Wallet top-up via ' . $provider . ' · ' . $statusText;
                                     }
                                 ?>
                                     <div class="ra-item">
@@ -645,6 +678,9 @@ include 'include/header-main.php';
                                             <div class="ra-badge <?php echo $badgeClass; ?>">
                                                 <i class="ri-bank-card-line"></i>
                                                 <?php echo htmlspecialchars($badgeText); ?>
+                                            </div>
+                                            <div class="ra-amt <?php echo $isDebit ? 'debit' : 'credit'; ?>">
+                                                <?php echo $isDebit ? '-₦' : '+₦'; ?><?php echo number_format($amount, 0); ?>
                                             </div>
                                             <?php if ($timeText !== '') { ?>
                                                 <div class="ra-time"><?php echo htmlspecialchars($timeText); ?></div>
