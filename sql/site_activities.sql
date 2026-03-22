@@ -1,3 +1,6 @@
+-- Dashboard "Recent Activity" reads ONLY from this table (see class.control.php recent_activities).
+-- Old history is not shown unless you backfill. Trigger new rows via payments/orders after deploy.
+--
 -- Optional: run manually if automatic CREATE TABLE is disabled on your host.
 CREATE TABLE IF NOT EXISTS `site_activities` (
     `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,

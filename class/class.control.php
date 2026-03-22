@@ -460,272 +460,30 @@ public function generateRandomString32($length = 32) {
         if ($limit <= 0) {
             $limit = 10;
         }
-        if (function_exists('site_activities_ensure_table')) {
-            site_activities_ensure_table($this->conn);
-            $cq = mysqli_query($this->conn, 'SELECT COUNT(*) AS c FROM site_activities');
-            $n = 0;
-            if ($cq && ($cw = mysqli_fetch_assoc($cq))) {
-                $n = (int)$cw['c'];
-            }
-            if ($n > 0) {
-                $lim = (int)$limit;
-                $sql = "SELECT sa.direction,
-                    sa.activity_type AS type,
-                    sa.ref AS txn_id,
-                    sa.amount AS amount,
-                    CASE WHEN sa.status = 1 THEN '1' WHEN sa.status = 2 THEN '2' ELSE '3' END AS status,
-                    sa.created_at AS `date`,
-                    UNIX_TIMESTAMP(sa.created_at) AS event_ts,
-                    COALESCE(u.name, u.username, u.email) AS user_name,
-                    sa.summary AS activity_text
-                FROM site_activities sa
-                LEFT JOIN user_data u ON u.id = sa.user_id
-                ORDER BY sa.id DESC
-                LIMIT {$lim}";
-                $q = mysqli_query($this->conn, $sql);
-                $rows = [];
-                while ($q && ($r = $q->fetch_assoc())) {
-                    $rows[] = $r;
-                }
-                return $rows;
-            }
+        // Single source of truth: site_activities only (no legacy merge — avoids stale/old merged feed).
+        if (!function_exists('site_activities_ensure_table') || !site_activities_ensure_table($this->conn)) {
+            return [];
         }
-        return $this->recent_activities_legacy($limit);
-    }
-
-    private function recent_activities_legacy($limit = 10){
-        $limit = (int)$limit;
-        if ($limit <= 0) $limit = 10;
-
-        // Large enough pool so we can show true timeline + backfill orders when deposits flood the top N.
-        $fetchCap = max(120, $limit * 8);
-
-        $debits = [];
-        $credits = [];
-
-        $rowEpoch = function ($row) {
-            $ts = (int)($row['event_ts'] ?? 0);
-            if ($ts > 0) {
-                return $ts;
-            }
-            $parsed = strtotime((string)($row['date'] ?? ''));
-            return ($parsed !== false && $parsed > 0) ? $parsed : 0;
-        };
-
-        $sortEvents = function (&$rows) use ($rowEpoch) {
-            usort($rows, function ($a, $b) use ($rowEpoch) {
-                $ta = $rowEpoch($a);
-                $tb = $rowEpoch($b);
-                if ($tb !== $ta) {
-                    return $tb <=> $ta;
-                }
-                return (int)($b['_sort_id'] ?? 0) <=> (int)($a['_sort_id'] ?? 0);
-            });
-        };
-
-        // Airtime debits
-        $sql = "
-            SELECT
-                'debit' AS direction,
-                'Airtime' AS type,
-                a.api_reference AS txn_id,
-                a.amount AS amount,
-                CASE WHEN a.status = 1 THEN '1' WHEN a.status = 0 THEN '2' ELSE '3' END AS status,
-                a.created_at AS date,
-                UNIX_TIMESTAMP(a.created_at) AS event_ts,
+        $lim = (int)$limit;
+        $sql = "SELECT sa.direction,
+                sa.activity_type AS type,
+                sa.ref AS txn_id,
+                sa.amount AS amount,
+                CASE WHEN sa.status = 1 THEN '1' WHEN sa.status = 2 THEN '2' ELSE '3' END AS status,
+                sa.created_at AS `date`,
+                UNIX_TIMESTAMP(sa.created_at) AS event_ts,
                 COALESCE(u.name, u.username, u.email) AS user_name,
-                CONCAT('Airtime ', COALESCE(n.name,'Network'), ' · ****', RIGHT(COALESCE(a.phone,''), 4)) AS activity_text,
-                a.id AS _sort_id
-            FROM airtime_orders a
-            LEFT JOIN networks n ON n.id = a.network_id
-            LEFT JOIN user_data u ON u.id = a.user_id
-            ORDER BY a.id DESC
-            LIMIT {$fetchCap}
-        ";
+                sa.summary AS activity_text
+            FROM site_activities sa
+            LEFT JOIN user_data u ON u.id = sa.user_id
+            ORDER BY sa.id DESC
+            LIMIT {$lim}";
         $q = mysqli_query($this->conn, $sql);
-        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
-
-        // Data debits (network from plan, fallback to order.network_id)
-        $sql = "
-            SELECT
-                'debit' AS direction,
-                'Data' AS type,
-                d.api_reference AS txn_id,
-                d.amount AS amount,
-                CASE WHEN d.status = 1 THEN '1' WHEN d.status = 0 THEN '2' ELSE '3' END AS status,
-                d.created_at AS date,
-                UNIX_TIMESTAMP(d.created_at) AS event_ts,
-                COALESCE(u.name, u.username, u.email) AS user_name,
-                CONCAT(
-                    'Data ',
-                    TRIM(CONCAT(COALESCE(n.name,''), ' ', COALESCE(p.plan_name,''), ' ', COALESCE(p.plan_type,''))),
-                    ' · ****',
-                    RIGHT(COALESCE(d.phone,''), 4)
-                ) AS activity_text,
-                d.id AS _sort_id
-            FROM data_orders d
-            LEFT JOIN data_plans p ON p.id = d.data_plan_id
-            LEFT JOIN networks n ON n.id = COALESCE(p.network_id, d.network_id)
-            LEFT JOIN user_data u ON u.id = d.user_id
-            ORDER BY d.id DESC
-            LIMIT {$fetchCap}
-        ";
-        $q = mysqli_query($this->conn, $sql);
-        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
-
-        // Cable debits
-        $sql = "
-            SELECT
-                'debit' AS direction,
-                'Cable' AS type,
-                cto.api_reference AS txn_id,
-                cto.amount AS amount,
-                CASE WHEN cto.status = 1 THEN '1' WHEN cto.status = 0 THEN '2' ELSE '3' END AS status,
-                cto.created_at AS date,
-                UNIX_TIMESTAMP(cto.created_at) AS event_ts,
-                COALESCE(u.name, u.username, u.email) AS user_name,
-                CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' · ****', RIGHT(COALESCE(cto.smartcard_number,''), 4)) AS activity_text,
-                cto.id AS _sort_id
-            FROM cable_tv_orders cto
-            LEFT JOIN cable_tv_plans tp ON tp.id = cto.cable_tv_plan_id
-            LEFT JOIN cable_tv_providers cp ON cp.id = tp.cable_id
-            LEFT JOIN user_data u ON u.id = cto.user_id
-            ORDER BY cto.id DESC
-            LIMIT {$fetchCap}
-        ";
-        $q = mysqli_query($this->conn, $sql);
-        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
-
-        // Electricity debits
-        $sql = "
-            SELECT
-                'debit' AS direction,
-                'Electricity' AS type,
-                eo.api_reference AS txn_id,
-                eo.amount AS amount,
-                CASE WHEN eo.status = 1 THEN '1' WHEN eo.status = 0 THEN '2' ELSE '3' END AS status,
-                eo.created_at AS date,
-                UNIX_TIMESTAMP(eo.created_at) AS event_ts,
-                COALESCE(u.name, u.username, u.email) AS user_name,
-                CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' · ****', RIGHT(COALESCE(eo.meter_number,''), 4)) AS activity_text,
-                eo.id AS _sort_id
-            FROM electricity_orders eo
-            LEFT JOIN electricity_providers ep ON ep.id = eo.electricity_provider_id
-            LEFT JOIN user_data u ON u.id = eo.user_id
-            ORDER BY eo.id DESC
-            LIMIT {$fetchCap}
-        ";
-        $q = mysqli_query($this->conn, $sql);
-        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
-
-        // Generic product orders (orders table)
-        $sql = "
-            SELECT
-                'debit' AS direction,
-                'Logs' AS type,
-                CONCAT('order-', o.id) AS txn_id,
-                o.total_amount AS amount,
-                CASE WHEN o.status = 1 THEN '1' WHEN o.status = 0 THEN '2' ELSE '3' END AS status,
-                MAX(o.created_at) AS date,
-                UNIX_TIMESTAMP(MAX(o.created_at)) AS event_ts,
-                COALESCE(MAX(u.name), MAX(u.username), MAX(u.email)) AS user_name,
-                MAX(p.name) AS activity_text,
-                o.id AS _sort_id
-            FROM orders o
-            INNER JOIN order_items oi ON oi.order_id = o.id
-            INNER JOIN products p ON p.id = oi.product_id
-            LEFT JOIN user_data u ON u.id = o.user_id
-            GROUP BY o.id
-            ORDER BY o.id DESC
-            LIMIT {$fetchCap}
-        ";
-        $q = mysqli_query($this->conn, $sql);
-        while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
-
-        $sortEvents($debits);
-
-        // Credits: wallet funding only (positive amounts). Avoid treating any future debit rows as "deposits".
-        $sql = "
-            SELECT
-                'credit' AS direction,
-                'Deposit' AS type,
-                ut.txn_id AS txn_id,
-                ut.amount AS amount,
-                CASE WHEN ut.status = 1 THEN '1' WHEN ut.status = 0 THEN '2' ELSE '3' END AS status,
-                ut.date AS date,
-                UNIX_TIMESTAMP(ut.date) AS event_ts,
-                COALESCE(u.name, u.username, u.email) AS user_name,
-                COALESCE(ut.type, 'Wallet') AS activity_text,
-                ut.id AS _sort_id
-            FROM user_transaction ut
-            LEFT JOIN user_data u ON u.id = ut.user_id
-            WHERE (ut.amount + 0) > 0
-            ORDER BY ut.id DESC
-            LIMIT {$fetchCap}
-        ";
-        $q = mysqli_query($this->conn, $sql);
-        while ($q && ($r = $q->fetch_assoc())) { $credits[] = $r; }
-
-        $sortEvents($credits);
-
-        // Full timeline (newest first), then take $limit — but if deposits dominate the top N,
-        // backfill the next chronological debits by swapping out oldest credits in the window.
-        $events = array_merge($debits, $credits);
-        $sortEvents($events);
-
-        $full = $events;
-        $out = array_slice($full, 0, $limit);
-
-        $countDebit = function ($arr) {
-            $n = 0;
-            foreach ($arr as $row) {
-                if (($row['direction'] ?? '') === 'debit') {
-                    $n++;
-                }
-            }
-            return $n;
-        };
-
-        $totalDebits = $countDebit($full);
-        $minDebits = 0;
-        if ($totalDebits > 0) {
-            $minDebits = min($totalDebits, max(2, (int)ceil($limit * 0.3)));
+        $rows = [];
+        while ($q && ($r = $q->fetch_assoc())) {
+            $rows[] = $r;
         }
-
-        if ($minDebits > 0 && $countDebit($out) < $minDebits) {
-            $need = $minDebits - $countDebit($out);
-            $extra = [];
-            for ($i = $limit; $i < count($full) && count($extra) < $need; $i++) {
-                if (($full[$i]['direction'] ?? '') === 'debit') {
-                    $extra[] = $full[$i];
-                }
-            }
-            $drop = count($extra);
-            $out = array_values($out);
-            $i = count($out) - 1;
-            while ($drop > 0 && $i >= 0) {
-                if (($out[$i]['direction'] ?? '') === 'credit') {
-                    array_splice($out, $i, 1);
-                    $drop--;
-                }
-                $i--;
-            }
-            while ($drop > 0 && count($out) > 0) {
-                array_pop($out);
-                $drop--;
-            }
-            $out = array_merge($out, $extra);
-            $sortEvents($out);
-            $out = array_slice($out, 0, $limit);
-        }
-
-        foreach ($out as &$ev) {
-            // Keep event_ts for UI "time ago" (matches DB / sort); drop internal sort key only.
-            unset($ev['_sort_id']);
-        }
-        unset($ev);
-
-        return $out;
+        return $rows;
     }
    public function unread_notifications_count(){
     $token = $this->get_token();                
