@@ -457,6 +457,44 @@ public function generateRandomString32($length = 32) {
 
     public function recent_activities($limit = 10){
         $limit = (int)$limit;
+        if ($limit <= 0) {
+            $limit = 10;
+        }
+        if (function_exists('site_activities_ensure_table')) {
+            site_activities_ensure_table($this->conn);
+            $cq = mysqli_query($this->conn, 'SELECT COUNT(*) AS c FROM site_activities');
+            $n = 0;
+            if ($cq && ($cw = mysqli_fetch_assoc($cq))) {
+                $n = (int)$cw['c'];
+            }
+            if ($n > 0) {
+                $lim = (int)$limit;
+                $sql = "SELECT sa.direction,
+                    sa.activity_type AS type,
+                    sa.ref AS txn_id,
+                    sa.amount AS amount,
+                    CASE WHEN sa.status = 1 THEN '1' WHEN sa.status = 2 THEN '2' ELSE '3' END AS status,
+                    sa.created_at AS `date`,
+                    UNIX_TIMESTAMP(sa.created_at) AS event_ts,
+                    COALESCE(u.name, u.username, u.email) AS user_name,
+                    sa.summary AS activity_text
+                FROM site_activities sa
+                LEFT JOIN user_data u ON u.id = sa.user_id
+                ORDER BY sa.id DESC
+                LIMIT {$lim}";
+                $q = mysqli_query($this->conn, $sql);
+                $rows = [];
+                while ($q && ($r = $q->fetch_assoc())) {
+                    $rows[] = $r;
+                }
+                return $rows;
+            }
+        }
+        return $this->recent_activities_legacy($limit);
+    }
+
+    private function recent_activities_legacy($limit = 10){
+        $limit = (int)$limit;
         if ($limit <= 0) $limit = 10;
 
         // Large enough pool so we can show true timeline + backfill orders when deposits flood the top N.

@@ -136,6 +136,19 @@ $gateway_id_sql = $gateway_id_safe > 0 ? (string) $gateway_id_safe : 'NULL';
 
 $conn->query("INSERT INTO user_transaction (user_id, amount, date, type, gateway_id, txn_id, status) 
               VALUES ('$user_id_safe', '$amount_safe', '$current_time', 'Enkpay', $gateway_id_sql, '$ref_safe', '1')");
+$ut_insert_id = (int)$conn->insert_id;
+if ($ut_insert_id > 0 && function_exists('site_activity_log')) {
+    site_activity_log($conn, [
+        'user_id' => $user_id_safe,
+        'direction' => 'credit',
+        'activity_type' => 'Deposit',
+        'amount' => (float)$amount,
+        'status' => 1,
+        'summary' => 'Wallet top-up via Enkpay · Success',
+        'ref' => $ref_safe,
+        'dedupe_key' => 'user_transaction:' . $ut_insert_id,
+    ]);
+}
 
 $wallet_q = $conn->query("SELECT balance, total_recharge FROM user_wallet WHERE user_id = '$user_id_safe' LIMIT 1");
 $wallet_data = $wallet_q ? $wallet_q->fetch_assoc() : null;

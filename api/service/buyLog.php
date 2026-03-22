@@ -94,6 +94,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     
             // Commit the transaction if all queries are successful
             mysqli_query($conn, "COMMIT");
+
+            if (function_exists('site_activity_log')) {
+                site_activity_log($conn, [
+                    'user_id' => (int)$user_id,
+                    'direction' => 'debit',
+                    'activity_type' => 'Logs',
+                    'amount' => (float)$total_price,
+                    'status' => 1,
+                    'summary' => (string)($product_info['name'] ?? 'Log order'),
+                    'ref' => 'order-' . (int)$order_id,
+                    'dedupe_key' => 'orders:' . (int)$order_id,
+                ]);
+            }
     
             echo json_encode(['status' => '200', 'message' => 'Order placed successfully']);
         } catch (Exception $e) {
@@ -184,6 +197,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     
             // Commit transaction
             mysqli_query($conn, "COMMIT");
+
+            if (function_exists('site_activity_log')) {
+                site_activity_log($conn, [
+                    'user_id' => (int)$user_id,
+                    'direction' => 'debit',
+                    'activity_type' => 'Logs',
+                    'amount' => (float)$total_price,
+                    'status' => 1,
+                    'summary' => (string)($product_info['name'] ?? 'Log order'),
+                    'ref' => 'order-' . (int)$order_id,
+                    'dedupe_key' => 'orders:' . (int)$order_id,
+                ]);
+            }
+
             echo json_encode(['status' => '200', 'message' => 'Order placed successfully']);
         } catch (Exception $e) {
             mysqli_query($conn, "ROLLBACK");

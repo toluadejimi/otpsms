@@ -97,6 +97,21 @@ mysqli_query($conn, "
     WHERE id='$order_id'
 ");
 
+if (function_exists('site_activity_log')) {
+    $pname = $provider['name'] ?? 'Provider';
+    $last4 = substr((string)$meter_number, -4);
+    site_activity_log($conn, [
+        'user_id' => (int)$user_id,
+        'direction' => 'debit',
+        'activity_type' => 'Electricity',
+        'amount' => $amount,
+        'status' => 1,
+        'summary' => 'Electricity ' . $pname . ' · ****' . $last4,
+        'ref' => $ref,
+        'dedupe_key' => 'electricity_orders:' . (int)$order_id,
+    ]);
+}
+
 echo json_encode([
     'status' => '200',
     'message' => 'Electricity payment successful',

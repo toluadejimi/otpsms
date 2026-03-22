@@ -35,6 +35,19 @@ if ($amount < 0) {
             $sql6 = mysqli_query($conn, "UPDATE user_wallet SET balance='$add_balance', total_recharge='$add_rc' WHERE user_id='$check_token'");
             $sqladd2 = "INSERT INTO user_transaction (user_id, amount, date, type, txn_id, status) VALUES ('$check_token', '$amount', '$current_time_in_ist', 'Refer Reward', 'reward', '1')";
             mysqli_query($conn, $sqladd2);
+            $ut_id = (int)mysqli_insert_id($conn);
+            if ($ut_id > 0 && function_exists('site_activity_log')) {
+                site_activity_log($conn, [
+                    'user_id' => (int)$check_token,
+                    'direction' => 'credit',
+                    'activity_type' => 'Deposit',
+                    'amount' => (float)$amount,
+                    'status' => 1,
+                    'summary' => 'Wallet top-up via Refer balance · Success',
+                    'ref' => 'reward',
+                    'dedupe_key' => 'user_transaction:' . $ut_id,
+                ]);
+            }
              $sqladd3 = "INSERT INTO refer_history (user_id, type, date, status, amount) VALUES ('$check_token', 'debit', '$current_time_in_ist', '1', '$amount')";
             mysqli_query($conn, $sqladd3);
             $cut_balance = $refer_balance - $amount;

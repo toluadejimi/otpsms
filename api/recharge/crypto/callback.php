@@ -97,7 +97,20 @@ $add_total_rc = $inr_amount + $total_recharge;
                      mysqli_query($conn, $sqladd);
                     $sql6 = mysqli_query($conn, "UPDATE user_wallet SET balance='$add_balance', total_recharge='$add_total_rc' WHERE user_id='".$user_id."'"); 
                       $sqladd2 = "INSERT INTO user_transaction (user_id, amount, date, type, txn_id, status) VALUES ('$user_id', '$inr_amount', '$current_time_in_ist', 'Crypto Recharge', '$order_id', '1')";
-                     mysqli_query($conn, $sqladd2); 
+                     mysqli_query($conn, $sqladd2);
+                     $ut_id = (int)mysqli_insert_id($conn);
+                     if ($ut_id > 0 && function_exists('site_activity_log')) {
+                         site_activity_log($conn, [
+                             'user_id' => (int)$user_id,
+                             'direction' => 'credit',
+                             'activity_type' => 'Deposit',
+                             'amount' => (float)$inr_amount,
+                             'status' => 1,
+                             'summary' => 'Wallet top-up via Crypto · Success',
+                             'ref' => (string)$order_id,
+                             'dedupe_key' => 'user_transaction:' . $ut_id,
+                         ]);
+                     }
     mysqli_query($conn,"UPDATE crypto_data SET status='1' WHERE order_id='$order_id'");                           
                 /*         if($refer_data['refer_by'] !=""){
                              $sql510=mysqli_query($conn,"SELECT * FROM refer_data WHERE own_code='".$refer_data['refer_by']."'");

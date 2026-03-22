@@ -97,4 +97,22 @@ mysqli_query($conn, "
     WHERE id='$order_id'
 ");
 
+if (function_exists('site_activity_log')) {
+    $nwq = mysqli_query($conn, "SELECT name FROM networks WHERE id='" . (int)$plan['network_id'] . "' LIMIT 1");
+    $nrow = $nwq ? mysqli_fetch_assoc($nwq) : null;
+    $netLabel = $nrow['name'] ?? '';
+    $line = trim($netLabel . ' ' . ($plan['plan_name'] ?? '') . ' ' . ($plan['plan_type'] ?? ''));
+    $last4 = substr((string)$phone, -4);
+    site_activity_log($conn, [
+        'user_id' => (int)$user_id,
+        'direction' => 'debit',
+        'activity_type' => 'Data',
+        'amount' => (float)$plan['selling_price'],
+        'status' => 1,
+        'summary' => 'Data ' . $line . ' · ****' . $last4,
+        'ref' => $ref,
+        'dedupe_key' => 'data_orders:' . (int)$order_id,
+    ]);
+}
+
 echo json_encode(['status' => '200', 'message' => 'Data purchase successful']);

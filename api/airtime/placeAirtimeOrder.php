@@ -90,4 +90,19 @@ mysqli_query($conn, "UPDATE airtime_orders
     SET status=1, status_description='Successful'
     WHERE id='$order_id'");
 
+if (function_exists('site_activity_log')) {
+    $netLabel = $network['name'] ?? 'Network';
+    $last4 = substr((string)$phone, -4);
+    site_activity_log($conn, [
+        'user_id' => (int)$user_id,
+        'direction' => 'debit',
+        'activity_type' => 'Airtime',
+        'amount' => $amount,
+        'status' => 1,
+        'summary' => 'Airtime ' . $netLabel . ' · ****' . $last4,
+        'ref' => $ref,
+        'dedupe_key' => 'airtime_orders:' . (int)$order_id,
+    ]);
+}
+
 echo json_encode(['status' => '200', 'message' => 'Airtime sent successfully']);

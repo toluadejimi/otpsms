@@ -10,6 +10,7 @@ define('DB_PASSWORD', '');        // db password – empty for local
 define('DB_DATABASE', 'otpsms'); // db name – change if yours is different
 
 require_once __DIR__ . '/connect.php';
+require_once __DIR__ . '/activity_log.php';
 require_once __DIR__ . '/session.php';
 require_once __DIR__ . '/../class/class.control.php';
 $site_sql = $conn->query("SELECT * FROM settings WHERE id='1'");

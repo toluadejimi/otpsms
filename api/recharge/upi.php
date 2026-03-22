@@ -61,7 +61,20 @@ $msg = "";
                      mysqli_query($conn, $sqladd);
                     $sql6 = mysqli_query($conn, "UPDATE user_wallet SET balance='$add_balance', total_recharge='$add_total_rc' WHERE user_id='".$user_id."'"); 
                       $sqladd2 = "INSERT INTO user_transaction (user_id, amount, date, type, txn_id, status) VALUES ('$user_id', '$amount', '$current_time_in_ist', 'Upi Recharge', '$txn_id', '1')";
-                     mysqli_query($conn, $sqladd2);   
+                     mysqli_query($conn, $sqladd2);
+                     $ut_id = (int)mysqli_insert_id($conn);
+                     if ($ut_id > 0 && function_exists('site_activity_log')) {
+                         site_activity_log($conn, [
+                             'user_id' => (int)$user_id,
+                             'direction' => 'credit',
+                             'activity_type' => 'Deposit',
+                             'amount' => (float)$amount,
+                             'status' => 1,
+                             'summary' => 'Wallet top-up via UPI · Success',
+                             'ref' => (string)$txn_id,
+                             'dedupe_key' => 'user_transaction:' . $ut_id,
+                         ]);
+                     }
                          if($refer_data['refer_by'] !=""){
                              $sql510=mysqli_query($conn,"SELECT * FROM refer_data WHERE own_code='".$refer_data['refer_by']."'");
                        $refer_data1=mysqli_fetch_assoc($sql510);

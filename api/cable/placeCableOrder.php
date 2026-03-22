@@ -100,4 +100,21 @@ mysqli_query($conn, "
     WHERE id='$order_id'
 ");
 
+if (function_exists('site_activity_log')) {
+    $pq2 = mysqli_query($conn, "SELECT name FROM cable_tv_providers WHERE id='" . (int)$plan['cable_id'] . "' LIMIT 1");
+    $prow = $pq2 ? mysqli_fetch_assoc($pq2) : null;
+    $pname = $prow['name'] ?? 'Provider';
+    $last4 = substr((string)$smartcard, -4);
+    site_activity_log($conn, [
+        'user_id' => (int)$user_id,
+        'direction' => 'debit',
+        'activity_type' => 'Cable',
+        'amount' => (float)$plan['selling_price'],
+        'status' => 1,
+        'summary' => 'Cable ' . $pname . ' · ****' . $last4,
+        'ref' => $ref,
+        'dedupe_key' => 'cable_tv_orders:' . (int)$order_id,
+    ]);
+}
+
 echo json_encode(['status' => '200', 'message' => 'Cable subscription successful']);
