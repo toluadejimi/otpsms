@@ -459,16 +459,25 @@ public function generateRandomString32($length = 32) {
         $limit = (int)$limit;
         if ($limit <= 0) $limit = 10;
 
-        // Pull enough rows per source so merged "newest debits" are truly recent across VTU + logs.
-        $fetchCap = max(60, $limit * 5);
+        // Large enough pool so we can show true timeline + backfill orders when deposits flood the top N.
+        $fetchCap = max(120, $limit * 8);
 
         $debits = [];
         $credits = [];
 
-        $sortDebits = function (&$rows) {
-            usort($rows, function ($a, $b) {
-                $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
-                $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
+        $rowEpoch = function ($row) {
+            $ts = (int)($row['event_ts'] ?? 0);
+            if ($ts > 0) {
+                return $ts;
+            }
+            $parsed = strtotime((string)($row['date'] ?? ''));
+            return ($parsed !== false && $parsed > 0) ? $parsed : 0;
+        };
+
+        $sortEvents = function (&$rows) use ($rowEpoch) {
+            usort($rows, function ($a, $b) use ($rowEpoch) {
+                $ta = $rowEpoch($a);
+                $tb = $rowEpoch($b);
                 if ($tb !== $ta) {
                     return $tb <=> $ta;
                 }
@@ -485,6 +494,7 @@ public function generateRandomString32($length = 32) {
                 a.amount AS amount,
                 CASE WHEN a.status = 1 THEN '1' WHEN a.status = 0 THEN '2' ELSE '3' END AS status,
                 a.created_at AS date,
+                UNIX_TIMESTAMP(a.created_at) AS event_ts,
                 COALESCE(u.name, u.username, u.email) AS user_name,
                 CONCAT('Airtime ', COALESCE(n.name,'Network'), ' · ****', RIGHT(COALESCE(a.phone,''), 4)) AS activity_text,
                 a.id AS _sort_id
@@ -506,6 +516,7 @@ public function generateRandomString32($length = 32) {
                 d.amount AS amount,
                 CASE WHEN d.status = 1 THEN '1' WHEN d.status = 0 THEN '2' ELSE '3' END AS status,
                 d.created_at AS date,
+                UNIX_TIMESTAMP(d.created_at) AS event_ts,
                 COALESCE(u.name, u.username, u.email) AS user_name,
                 CONCAT(
                     'Data ',
@@ -533,6 +544,7 @@ public function generateRandomString32($length = 32) {
                 cto.amount AS amount,
                 CASE WHEN cto.status = 1 THEN '1' WHEN cto.status = 0 THEN '2' ELSE '3' END AS status,
                 cto.created_at AS date,
+                UNIX_TIMESTAMP(cto.created_at) AS event_ts,
                 COALESCE(u.name, u.username, u.email) AS user_name,
                 CONCAT('Cable ', COALESCE(cp.name,'Provider'), ' · ****', RIGHT(COALESCE(cto.smartcard_number,''), 4)) AS activity_text,
                 cto.id AS _sort_id
@@ -555,6 +567,7 @@ public function generateRandomString32($length = 32) {
                 eo.amount AS amount,
                 CASE WHEN eo.status = 1 THEN '1' WHEN eo.status = 0 THEN '2' ELSE '3' END AS status,
                 eo.created_at AS date,
+                UNIX_TIMESTAMP(eo.created_at) AS event_ts,
                 COALESCE(u.name, u.username, u.email) AS user_name,
                 CONCAT('Electricity ', COALESCE(ep.name,'Provider'), ' · ****', RIGHT(COALESCE(eo.meter_number,''), 4)) AS activity_text,
                 eo.id AS _sort_id
@@ -575,7 +588,8 @@ public function generateRandomString32($length = 32) {
                 CONCAT('order-', o.id) AS txn_id,
                 o.total_amount AS amount,
                 CASE WHEN o.status = 1 THEN '1' WHEN o.status = 0 THEN '2' ELSE '3' END AS status,
-                o.created_at AS date,
+                MAX(o.created_at) AS date,
+                UNIX_TIMESTAMP(MAX(o.created_at)) AS event_ts,
                 COALESCE(MAX(u.name), MAX(u.username), MAX(u.email)) AS user_name,
                 MAX(p.name) AS activity_text,
                 o.id AS _sort_id
@@ -590,7 +604,7 @@ public function generateRandomString32($length = 32) {
         $q = mysqli_query($this->conn, $sql);
         while ($q && ($r = $q->fetch_assoc())) { $debits[] = $r; }
 
-        $sortDebits($debits);
+        $sortEvents($debits);
 
         // Credits: wallet funding only (positive amounts). Avoid treating any future debit rows as "deposits".
         $sql = "
@@ -601,6 +615,7 @@ public function generateRandomString32($length = 32) {
                 ut.amount AS amount,
                 CASE WHEN ut.status = 1 THEN '1' WHEN ut.status = 0 THEN '2' ELSE '3' END AS status,
                 ut.date AS date,
+                UNIX_TIMESTAMP(ut.date) AS event_ts,
                 COALESCE(u.name, u.username, u.email) AS user_name,
                 COALESCE(ut.type, 'Wallet') AS activity_text,
                 ut.id AS _sort_id
@@ -613,38 +628,65 @@ public function generateRandomString32($length = 32) {
         $q = mysqli_query($this->conn, $sql);
         while ($q && ($r = $q->fetch_assoc())) { $credits[] = $r; }
 
-        usort($credits, function ($a, $b) {
-            $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
-            $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
-            if ($tb !== $ta) {
-                return $tb <=> $ta;
-            }
-            return (int)($b['_sort_id'] ?? 0) <=> (int)($a['_sort_id'] ?? 0);
-        });
+        $sortEvents($credits);
 
-        // Single chronological feed: merge debits + credits, then keep the N most recent by date/time.
-        // (Do NOT reserve fixed counts per type — that stacks "all new deposits" then "older orders".)
+        // Full timeline (newest first), then take $limit — but if deposits dominate the top N,
+        // backfill the next chronological debits by swapping out oldest credits in the window.
         $events = array_merge($debits, $credits);
+        $sortEvents($events);
 
-        usort($events, function ($a, $b) {
-            $ta = strtotime((string)($a['date'] ?? '')) ?: 0;
-            $tb = strtotime((string)($b['date'] ?? '')) ?: 0;
-            if ($tb !== $ta) {
-                return $tb <=> $ta;
+        $full = $events;
+        $out = array_slice($full, 0, $limit);
+
+        $countDebit = function ($arr) {
+            $n = 0;
+            foreach ($arr as $row) {
+                if (($row['direction'] ?? '') === 'debit') {
+                    $n++;
+                }
             }
-            return (int)($b['_sort_id'] ?? 0) <=> (int)($a['_sort_id'] ?? 0);
-        });
+            return $n;
+        };
 
-        if (count($events) > $limit) {
-            $events = array_slice($events, 0, $limit);
+        $totalDebits = $countDebit($full);
+        $minDebits = 0;
+        if ($totalDebits > 0) {
+            $minDebits = min($totalDebits, max(2, (int)ceil($limit * 0.3)));
         }
 
-        foreach ($events as &$ev) {
-            unset($ev['_sort_id']);
+        if ($minDebits > 0 && $countDebit($out) < $minDebits) {
+            $need = $minDebits - $countDebit($out);
+            $extra = [];
+            for ($i = $limit; $i < count($full) && count($extra) < $need; $i++) {
+                if (($full[$i]['direction'] ?? '') === 'debit') {
+                    $extra[] = $full[$i];
+                }
+            }
+            $drop = count($extra);
+            $out = array_values($out);
+            $i = count($out) - 1;
+            while ($drop > 0 && $i >= 0) {
+                if (($out[$i]['direction'] ?? '') === 'credit') {
+                    array_splice($out, $i, 1);
+                    $drop--;
+                }
+                $i--;
+            }
+            while ($drop > 0 && count($out) > 0) {
+                array_pop($out);
+                $drop--;
+            }
+            $out = array_merge($out, $extra);
+            $sortEvents($out);
+            $out = array_slice($out, 0, $limit);
+        }
+
+        foreach ($out as &$ev) {
+            unset($ev['_sort_id'], $ev['event_ts']);
         }
         unset($ev);
 
-        return $events;
+        return $out;
     }
    public function unread_notifications_count(){
     $token = $this->get_token();                
