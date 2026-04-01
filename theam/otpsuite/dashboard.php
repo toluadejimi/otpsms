@@ -339,17 +339,11 @@ include 'include/header-main.php';
                             </div>
                             <strong>View History</strong>
                         </a>
-                        <a href="buy-usa-only-numbers" class="item">
+                        <a href="virtual-card" class="item">
                             <div class="iconbox">
-                                <ion-icon name="add-circle"></ion-icon>
+                                <ion-icon name="card-outline"></ion-icon>
                             </div>
-                            <strong>Buy Number</strong>
-                        </a>
-                        <a href="https://whatsapp.com/channel/0029VbB96hpAO7RJnV3xYa2K" class="item">
-                            <div class="iconbox">
-                                <ion-icon name="paper-plane"></ion-icon>
-                            </div>
-                            <strong>Join Channel</strong>
+                            <strong>Virtual Card</strong>
                         </a>
                     </div>
                 </div>
